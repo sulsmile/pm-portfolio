@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+    <h1>测试页面</h1>
+    <p>如果你能看到这个页面，说明HTML文件可以正常访问。</p>
+    <p>请打开浏览器控制台（按F12），查看是否有JavaScript错误。</p>
+
+    <div id="test"></div>
+
+    <script>
+        document.getElementById('test').innerHTML = '<p style="color: green;">JavaScript 正常工作！</p>';
+        console.log('JavaScript已加载');
+
+        // 测试localStorage
+        try {
+            localStorage.setItem('test', '123');
+            console.log('localStorage正常工作');
+        } catch(e) {
+            console.error('localStorage错误:', e);
+        }
+    </script>
+</body>
+</html>

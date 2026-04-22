@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>调试页面</title>
+</head>
+<body>
+    <h1>调试页面</h1>
+    <div id="output"></div>
+    <button onclick="clearAndReload()">清除localStorage并重新加载</button>
+    <button onclick="openMain()">打开主页面</button>
+
+    <script>
+        const output = document.getElementById('output');
+
+        function log(msg) {
+            const p = document.createElement('p');
+            p.textContent = msg;
+            output.appendChild(p);
+            console.log(msg);
+        }
+
+        function checkState() {
+            log('=== 检查状态 ===');
+
+            // 检查localStorage
+            const saved = localStorage.getItem('pmPortfolioProjects');
+            if (saved) {
+                try {
+                    const projects = JSON.parse(saved);
+                    log(`✅ localStorage有数据: ${projects.length}个项目`);
+                    projects.forEach((p, i) => {
+                        log(`  项目${i+1}: ${p.name}`);
+                    });
+                } catch (e) {
+                    log(`❌ localStorage解析失败: ${e.message}`);
+                }
+            } else {
+                log('❌ localStorage为空');
+            }
+
+            // 检查示例数据
+            log('\n=== 示例项目数据 ===');
+            log(`aiAssistantProject.name: ${typeof aiAssistantProject !== 'undefined' ? aiAssistantProject.name : 'undefined'}`);
+            log(`phizCallProject.name: ${typeof phizCallProject !== 'undefined' ? phizCallProject.name : 'undefined'}`);
+        }
+
+        function clearAndReload() {
+            localStorage.removeItem('pmPortfolioProjects');
+            log('✅ 已清除localStorage');
+            setTimeout(() => location.reload(), 500);
+        }
+
+        function openMain() {
+            window.open('index.html', '_blank');
+        }
+
+        // 示例项目数据
+        const aiAssistantProject = {
+            name: "Phiz AI 智能助手",
+            tagline: "对话为核心、多模态扩展的智能助理",
+            role: "产品经理",
+            description: "Phiz AI是一款基于大语言模型的全能AI智能助手应用，集成了对话、创作、信息获取等多种AI能力。",
+            stats: "12个核心功能模块, 多模态交互",
+            painPoints: "工具碎片化\n学习成本高",
+            personas: "职场创作者\n学生研究者",
+            userJourney: "触发需求\n打开应用\n选择功能\n获得结果",
+            userStories: "作为职场创作者，我想要快速生成工作邮件",
+            features: "基本聊天功能\n历史记录侧边栏",
+            architecture: "微服务架构",
+            axureUrl: "https://39ilcq.axshare.com",
+            createdAt: "2023.07 - 2025.01"
+        };
+
+        const phizCallProject = {
+            name: "Phiz Call 音视频通话",
+            tagline: "社交场景的\"有温度\"通话工具",
+            role: "产品经理",
+            description: "Phiz Call是一款聚焦社交场景的音视频通话工具，通过解决巴西用户网络异常痛点。",
+            stats: "4大用户圈层, 4大核心场景",
+            painPoints: "网络异常痛点\n社交关系链拓展困难",
+            personas: "核心社交圈\n扩展社交圈",
+            userJourney: "情感维系场景\n朋友聚会讨论",
+            userStories: "作为核心社交圈用户，我想要网络断开预警",
+            features: "网络异常兜底\n社交关系链拓展",
+            architecture: "分层架构",
+            axureUrl: "https://codesign.qq.com/s/627363398067674",
+            createdAt: "2023.07 - 2025.01"
+        };
+
+        // 初始化示例项目
+        const sampleProjects = [aiAssistantProject, phizCallProject];
+        const saved = localStorage.getItem('pmPortfolioProjects');
+
+        if (!saved) {
+            log('localStorage为空，初始化示例项目...');
+            localStorage.setItem('pmPortfolioProjects', JSON.stringify(sampleProjects));
+            log('✅ 已保存示例项目到localStorage');
+        }
+
+        checkState();
+    </script>
+</body>
+</html>

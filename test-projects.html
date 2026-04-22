@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试 - PM Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .error {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+        .success {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .project-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .project-card h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .project-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>📦 PM Portfolio - 项目测试页面</h1>
+
+    <div id="debugOutput" class="debug-info">
+        <h3>调试信息</h3>
+        <div id="debugMessages"></div>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <button class="btn" onclick="clearLocalStorage()">清除缓存并重新加载</button>
+        <button class="btn" onclick="loadSampleProjects()">加载示例项目</button>
+        <button class="btn btn-danger" onclick="openMainPage()">打开主页面</button>
+    </div>
+
+    <div id="projectsCount" style="margin: 20px 0; font-size: 18px; font-weight: bold;"></div>
+
+    <div id="projectsContainer" class="projects-grid"></div>
+
+    <script>
+        let projects = [];
+
+        // 示例项目数据
+        const sampleProjects = [
+            {
+                name: "Phiz AI 智能助手",
+                tagline: "对话为核心、多模态扩展的智能助理",
+                role: "产品经理",
+                description: "Phiz AI是一款基于大语言模型的全能AI智能助手应用，集成了对话、创作、信息获取等多种AI能力。我负责该项目从0到1的产品建设，完成用户调研、竞品分析、产品功能架构设计和PRD文档撰写。",
+                stats: "12个核心功能模块, 多模态交互, 侧边栏历史, 底部标签导航",
+                painPoints: "工具碎片化：用户需要在不同APP间切换才能使用不同AI功能\n学习成本高：每款AI工具有独立的操作逻辑和界面\n场景割裂：对话、创作、信息获取等场景无法自然衔接\n历史管理困难：跨设备的对话记录和创作内容难以统一管理和查找\n语音交互缺失：多数AI工具仅支持文本输入，无法满足移动场景下的便捷输入需求",
+                personas: "职场创作者（主要）：25-35岁的知识工作者，包括产品经理、市场营销人员、内容创作者\n学生研究者（次要）：18-25岁的学生群体，包括本科生、研究生\n社交活跃者（扩展）：20-30岁的年轻用户，社交需求强烈，喜欢尝试新功能",
+                userJourney: "触发需求：用户在工作或生活中遇到需要AI帮助的场景\n打开应用：启动Phiz AI，看到熟悉的对话界面、侧边栏历史记录和底部功能标签\n选择功能：通过底部标签页切换功能（对话、写作、图片等）\n获得结果：AI快速返回结果，用户可以复制保存、继续对话深入",
+                userStories: "作为职场创作者，我想要快速生成工作邮件和报告，以便节省时间\n作为学生研究者，我想要上传图片并提取文字（OCR），以便快速整理笔记\n作为职场创作者，我想要用语音与AI对话，以便在通勤时也能获取AI帮助\n作为社交活跃者，我想要查看历史对话记录，以便回顾之前的内容",
+                features: "基本聊天功能：基于大语言模型的多轮对话能力\n历史记录侧边栏：管理所有对话历史，快速搜索、回顾和继续之前的对话\n底部标签导航：对话、写作、图片、新闻等功能的便捷切换\nAI写作：文案生成、邮件撰写、报告输出，多种写作模板\n图片生成：文本描述生成创意图片，支持多种风格和尺寸\n图片转文字（OCR）：强大的OCR能力，精准识别图片中的文字\n发送语音：语音输入功能，解放双手，适合移动场景\n语音聊天：实时语音对话，流式识别和反馈，自然的语音交互体验\n多语言翻译：支持中英日韩等多种语言的互译\n查询天气：实时天气信息查询，支持全球城市\n每日新鲜事：个性化新闻推荐，基于用户兴趣和对话历史\n新闻后台：内容管理和发布系统，支持新闻源配置和内容审核",
+                architecture: "Phiz AI采用微服务架构，确保高可用和可扩展性：\n【用户交互层】Web应用、移动端、语音接口\n【应用服务层】对话管理、用户服务、历史记录、内容管理\n【AI处理层】LLM引擎、图像生成、OCR识别、语音识别、翻译服务\n【数据存储层】用户数据库、对话存储、文件存储、缓存层\n技术栈：Vue3, TypeScript, WebSocket, Node.js, Python, API集成",
+                axureUrl: "https://39ilcq.axshare.com",
+                createdAt: "2023.07 - 2025.01"
+            },
+            {
+                name: "Phiz Call 音视频通话",
+                tagline: "社交场景的\"有温度\"通话工具",
+                role: "产品经理",
+                description: "Phiz Call是一款聚焦社交场景的音视频通话工具，通过解决巴西用户网络异常痛点、拓展社交关系链、提供情感化设计体验，为用户的情感维系、朋友聚会、兴趣协作等社交场景提供稳定、便捷、有趣的实时沟通服务。我负责音视频通话功能的产品设计，包括1v1/群组通话、屏幕共享、通话录制等核心功能。产品基于真实用户研究（20+访谈），针对4大社交圈层和4大场景进行深度优化。",
+                stats: "4大用户圈层, 4大核心场景, 20+用户访谈, 85%内测满意度",
+                painPoints: "网络异常痛点：通话突然断开，不知道是网络问题还是对方挂断，情感交流被打断，产生焦虑\n社交关系链拓展困难：想邀请朋友加入通话但不在群里，需要逐个私聊邀请，操作繁琐\n来电意图不明：不知道对方为什么来电，决策压力大，容易拒接\n群组通话管理混乱：多人讨论无序，发言混乱，缺少主持人工具\n屏幕共享卡顿：协作场景下屏幕共享质量差，无法实时标注讨论\n情感维系工具缺失：无法保存通话中的美好瞬间，缺乏情感维系激励机制",
+                personas: "核心社交圈（主要）：家人、恋人、闺蜜，如Ana（26岁，异地恋，每晚视频30-90分钟），需求是情感维系、连接稳定\n扩展社交圈（次要）：朋友、同学、同事，如Lucas（22岁，大学生，每周聚会2-3次），需求是组织便捷、氛围活跃\n轻社交圈（扩展）：偶尔联系的弱关系，如Mariana（28岁，月度家庭通话5-15分钟），需求是快速接通、简单易用\n同好社交圈（扩展）：兴趣社群、学习小组，如Julia（24岁，设计小组讨论30-60分钟），需求是高效协作、工具丰富",
+                userJourney: "情感维系场景（Ana异地恋睡前视频）：晚上10点习惯性检查手机→整理背景调整光线→点击视频通话等待接听→分享今天的事情感交流→互道晚安带着满足感入睡\n朋友聚会讨论（Lucas组织朋友群）：计划周末聚会需要协调→在朋友群发起群组通话→讨论时间地点投票决定→确认计划分享到群里\n临时问事协调（Mariana确认信息）：需要确认信息想到对方→直接拨打等待接听→询问问题得到答案→挂断\n学习小组讨论（Julia设计小组）：准备学习讨论整理议题→在学习群发起群组通话→分享屏幕讨论作业→记录不完整需要手动记录",
+                userStories: "作为核心社交圈用户（Ana），我想要网络断开预警和智能重连，以便避免情感交流突然中断的焦虑，保持通话连续性\n作为扩展社交圈用户（Lucas），我想要邀请群外成员和通话链接分享，以便快速组织朋友聚会，拓展社交关系链\n作为轻社交圈用户（Mariana），我想要来电意图显示，以便知道对方为何来电，降低接听决策压力，提升接听率\n作为同好社交圈用户（Julia），我想要高质量屏幕共享和实时标注，以便提升学习小组的协作效率，高效完成任务\n作为核心社交圈用户，我想要精彩瞬间切片和通话统计，以便保存通话中的美好回忆，增强情感维系",
+                features: "网络异常兜底（核心差异化）：网络断开预警（提前10秒通知）、智能重连（3秒内自动）、弱网降级（自动降低画质/切音频）、明确提示原因\n社交关系链拓展：通话中邀请群外成员、临时邀请链接、通话链接社交分享、全选成员一键呼叫，降低社交组织成本\n来电意图显示：显示通话意图（问候一下、快速聊5分钟、商务客服等），降低决策压力，提升接听率\n高质量屏幕共享：优化屏幕共享质量、减少卡顿、实时标注工具、协作白板，提升协作效率\n群组通话管理：主持人工具、发言管理、等候室、主讲人模式，提升群组讨论有序性\n情感化功能：通话\"小火花\"（连续通话天数）、纪念日提醒、通话时长统计、精彩瞬间AI智能截屏，增强情感维系\n通知系统优化：多通道推送保障（FCM+华为+APNs）、后台通知显示、自定义通知声音，确保不错过重要来电\n群组音频优化：确保所有参与者音频正常，解决WhatsApp\"第三方听不到\"的严重bug\n视频问题修复：解决前置摄像头黑屏/闪烁问题，视频连接稳定性优化\n性能优化：推送通道优化、低端机型编解码优化、长时间通话电池优化",
+                architecture: "Phiz Call采用分层架构，聚焦社交场景通话体验：\n【用户体验层】通话前体验（来电意图显示、预约通话）、通话中体验（网络断开预警、智能重连、弱网降级）、通话后体验（通话结束原因提示、一键重拨、AI通话摘要）\n【触达层】多级推送（长连接+FCM+OEM厂商通道）、秒级唤醒、CallKit集成\n【核心功能层】1v1音视频、群组通话、通话辅助功能\n【AI智能中台】实时交互优化（AI降噪、音视频超分、实时美颜）、跨场景能力（实时字幕、语音翻译）、辅助智能（会议摘要、关键事项提取）\n【调度层】房间管理、媒体协商、资源调度\n【传输层】自研RTC引擎、协议栈、网络优化\n技术栈：WebRTC, 自研RTC引擎, Node.js, Python, 音视频编解码, AI语音/视觉模型",
+                axureUrl: "https://codesign.qq.com/s/627363398067674",
+                createdAt: "2023.07 - 2025.01"
+            }
+        ];
+
+        function log(message, type = 'info') {
+            const messagesDiv = document.getElementById('debugMessages');
+            const msgDiv = document.createElement('div');
+            msgDiv.style.margin = '5px 0';
+            msgDiv.textContent = message;
+            if (type === 'error') {
+                msgDiv.style.color = '#c62828';
+            } else if (type === 'success') {
+                msgDiv.style.color = '#2e7d32';
+            }
+            messagesDiv.appendChild(msgDiv);
+            console.log(message);
+        }
+
+        function clearLocalStorage() {
+            localStorage.removeItem('pmPortfolioProjects');
+            log('✅ 已清除localStorage', 'success');
+            projects = [];
+            renderProjects();
+        }
+
+        function loadSampleProjects() {
+            projects = [...sampleProjects];
+            localStorage.setItem('pmPortfolioProjects', JSON.stringify(projects));
+            log('✅ 已加载示例项目到localStorage', 'success');
+            renderProjects();
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            const countDiv = document.getElementById('projectsCount');
+
+            countDiv.textContent = `项目数量：${projects.length}`;
+
+            if (projects.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999; padding: 40px;">暂无项目，请点击"加载示例项目"按钮</p>';
+                return;
+            }
+
+            container.innerHTML = projects.map((project, index) => `
+                <div class="project-card" onclick="showProjectDetail(${index})">
+                    <h2>${project.name}</h2>
+                    <p><strong>${project.tagline}</strong></p>
+                    <p>${project.description.substring(0, 100)}...</p>
+                    <p><small>👤 ${project.role} | 📊 ${project.stats}</small></p>
+                </div>
+            `).join('');
+
+            log(`✅ 已渲染 ${projects.length} 个项目`, 'success');
+        }
+
+        function showProjectDetail(index) {
+            const project = projects[index];
+            alert(`项目详情：\n\n名称：${project.name}\n标语：${project.tagline}\n角色：${project.role}\n\n描述：${project.description}\n\n原型：${project.axureUrl}`);
+        }
+
+        function openMainPage() {
+            window.open('index.html', '_blank');
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            log('🚀 页面已加载', 'success');
+
+            // 尝试从localStorage加载
+            try {
+                const saved = localStorage.getItem('pmPortfolioProjects');
+                if (saved) {
+                    projects = JSON.parse(saved);
+                    log(`📦 从localStorage加载了 ${projects.length} 个项目`, 'success');
+                } else {
+                    log('⚠️ localStorage为空', 'info');
+                }
+            } catch (e) {
+                log(`❌ 加载localStorage失败: ${e.message}`, 'error');
+            }
+
+            renderProjects();
+        });
+    </script>
+</body>
+</html>

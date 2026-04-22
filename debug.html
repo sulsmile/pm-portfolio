@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试 - PM Portfolio</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; border-left: 4px solid #007bff; }
+        .error { background: #ffebee; border-left-color: #f44336; }
+        .success { background: #e8f5e9; border-left-color: #4caf50; }
+        h1 { color: #333; }
+        #projects { margin-top: 20px; }
+        .project-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .project-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 PM Portfolio 调试页面</h1>
+
+    <div id="debug-output"></div>
+
+    <div class="debug">
+        <h3>检查项目数据：</h3>
+        <div id="projects-count"></div>
+        <div id="projects-list"></div>
+    </div>
+
+    <div class="debug">
+        <h3>操作：</h3>
+        <button onclick="clearStorage()">清除localStorage并刷新</button>
+        <button onclick="reloadPage()">重新加载项目</button>
+        <button onclick="openOriginal()">打开原始页面</button>
+    </div>
+
+    <script>
+        const debugOutput = document.getElementById('debug-output');
+
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `debug ${type}`;
+            div.textContent = message;
+            debugOutput.appendChild(div);
+            console.log(message);
+        }
+
+        function checkProjects() {
+            try {
+                const saved = localStorage.getItem('pmPortfolioProjects');
+
+                if (!saved) {
+                    log('❌ localStorage中没有找到项目数据', 'error');
+                    document.getElementById('projects-count').innerHTML = '<p>项目数量：<strong>0</strong></p>';
+                    return;
+                }
+
+                const projects = JSON.parse(saved);
+                log(`✅ 成功读取项目数据：${projects.length}个项目`, 'success');
+                document.getElementById('projects-count').innerHTML = `<p>项目数量：<strong>${projects.length}</strong></p>`;
+
+                let html = '<div id="projects">';
+                projects.forEach((project, index) => {
+                    html += `
+                        <div class="project-card" onclick="showProjectDetail(${index})">
+                            <h3>${project.name}</h3>
+                            <p><strong>${project.tagline || ''}</strong></p>
+                            <p>${project.description ? project.description.substring(0, 100) + '...' : ''}</p>
+                            <p><small>角色：${project.role}</small></p>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                document.getElementById('projects-list').innerHTML = html;
+
+            } catch (error) {
+                log(`❌ 读取项目数据出错：${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        function showProjectDetail(index) {
+            const saved = localStorage.getItem('pmPortfolioProjects');
+            const projects = JSON.parse(saved);
+            const project = projects[index];
+
+            alert(`项目详情：\n\n名称：${project.name}\n标语：${project.tagline}\n角色：${project.role}\n\n描述：${project.description}\n\n原型：${project.axureUrl}`);
+        }
+
+        function clearStorage() {
+            if (confirm('确定要清除所有项目数据吗？')) {
+                localStorage.removeItem('pmPortfolioProjects');
+                log('✅ 已清除localStorage', 'success');
+                setTimeout(() => location.reload(), 1000);
+            }
+        }
+
+        function reloadPage() {
+            location.reload();
+        }
+
+        function openOriginal() {
+            window.open('index.html', '_blank');
+        }
+
+        // 页面加载时执行检查
+        window.addEventListener('load', () => {
+            log('🚀 调试页面已加载', 'success');
+            log('📁 当前URL：' + window.location.href);
+
+            // 检查localStorage
+            try {
+                const testKey = '__test__';
+                localStorage.setItem(testKey, 'test');
+                localStorage.removeItem(testKey);
+                log('✅ localStorage 工作正常', 'success');
+            } catch (e) {
+                log('❌ localStorage 不可用：' + e.message, 'error');
+            }
+
+            checkProjects();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能助手 - 产品经理作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a1a2e;
+            --coral: #e94560;
+            --cream: #f8f6f2;
+            --text: #2d2d3a;
+            --text-light: #6b6b7b;
+            --accent-blue: #4a90d9;
+            --accent-green: #2ecc71;
+            --accent-purple: #9b59b6;
+            --accent-orange: #f39c12;
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            color: var(--navy);
+            line-height: 1.2;
+        }
+
+        .section-label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--navy);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--coral);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--navy) 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero-tagline {
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 400;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .hero-description {
+            font-family: 'DM Sans', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3rem;
+            color: var(--coral);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pain-point-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .pain-point-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pain-point-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pain-point-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--navy);
+        }
+
+        .pain-point-card p {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Personas Section */
+        .personas-section {
+            padding: 6rem 0;
+            background: var(--cream);
+        }
+
+        .personas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .persona-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .persona-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+
+        .persona-card.primary::before {
+            background: var(--coral);
+        }
+
+        .persona-card.secondary::before {
+            background: var(--accent-blue);
+        }
+
+        .persona-card.extended::before {
+            background: var(--accent-purple);
+        }
+
+        .persona-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .persona-tag {
+            display: inline-block;
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .persona-card.primary .persona-tag {
+            background: rgba(233, 69, 96, 0.1);
+            color: var(--coral);
+        }
+
+        .persona-card.secondary .persona-tag {
+            background: rgba(74, 144, 217, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .persona-card.extended .persona-tag {
+            background: rgba(155, 89, 182, 0.1);
+            color: var(--accent-purple);
+        }
+
+        .persona-card h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .persona-card .persona-description {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .persona-goals {
+            list-style: none;
+        }
+
+        .persona-goals li {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .persona-goals li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        /* User Journey Section */
+        .journey-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .journey-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .journey-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            position: relative;
+        }
+
+        .journey-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--coral);
+        }
+
+        .step-card {
+            background: var(--cream);
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--navy);
+            color: white;
+            border-radius: 50%;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .step-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-card p {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-light);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .step-pain-point {
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(0, 0, 0, 0.1);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            color: var(--coral);
+            font-style: italic;
+        }
+
+        /* User Stories Section */
+        .stories-section {
+            padding: 6rem 0;
+            background: var(--navy);
+            color: white;
+        }
+
+        .stories-section .section-label {
+            color: var(--coral);
+        }
+
+        .stories-section h2 {
+            color: white;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--coral);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px);
+        }
+
+        .story-role {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--coral);
+            margin-bottom: 0.75rem;
+        }
+
+        .story-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+
+        .story-card p {
+            font-family: 'DM Sans', sans-serif;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-badge {
+            display: inline-block;
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .feature-badge.core {
+            background: rgba(233, 69, 96, 0.1);
+            color: var(--coral);
+        }
+
+        .feature-badge.ai {
+            background: rgba(155, 89, 182, 0.1);
+            color: var(--accent-purple);
+        }
+
+        .feature-badge.ux {
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--accent-green);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-metric {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Architecture Section */
+        .architecture-section {
+            padding: 6rem 0;
+            background: var(--cream);
+        }
+
+        .architecture-diagram {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .arch-layer {
+            margin-bottom: 2rem;
+        }
+
+        .arch-layer:last-child {
+            margin-bottom: 0;
+        }
+
+        .arch-label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .arch-components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .arch-component {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border: 2px solid;
+        }
+
+        .arch-component.data {
+            background: rgba(243, 156, 18, 0.1);
+            border-color: var(--accent-orange);
+            color: #d35400;
+        }
+
+        .arch-component.processing {
+            background: rgba(155, 89, 182, 0.1);
+            border-color: var(--accent-purple);
+            color: #8e44ad;
+        }
+
+        .arch-component.storage {
+            background: rgba(46, 204, 113, 0.1);
+            border-color: var(--accent-green);
+            color: #27ae60;
+        }
+
+        .arch-component.app {
+            background: rgba(74, 144, 217, 0.1);
+            border-color: var(--accent-blue);
+            color: #2980b9;
+        }
+
+        .arch-component.user {
+            background: rgba(26, 26, 46, 0.1);
+            border-color: var(--navy);
+            color: var(--navy);
+        }
+
+        .arch-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin: 1rem 0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            padding: 0.5rem 1rem;
+            background: var(--navy);
+            color: white;
+            border-radius: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .insight-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .insight-card p {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-light);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        footer a {
+            color: var(--coral);
+            text-decoration: none;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .journey-steps {
+                flex-direction: column;
+            }
+
+            .journey-step:not(:last-child)::after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -2rem;
+                transform: translateX(50%);
+            }
+
+            .journey-step {
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="nav-logo">AI Assistant</a>
+            <div class="nav-links">
+                <a href="#problem">问题</a>
+                <a href="#personas">用户</a>
+                <a href="#journey">旅程</a>
+                <a href="#features">功能</a>
+                <a href="#architecture">架构</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="section-label reveal">Product Portfolio</div>
+            <h1 class="reveal reveal-delay-1">AI智能助手</h1>
+            <p class="hero-tagline reveal reveal-delay-2">让AI触手可及，让智能无处不在</p>
+            <p class="hero-description reveal reveal-delay-3">
+                一款基于大语言模型的一站式AI应用，集对话、创作、信息获取于一体。
+                通过直观的界面与丰富的功能，让每个人都能轻松使用AI解决日常工作与生活中的问题。
+            </p>
+            <div class="hero-stats reveal reveal-delay-3">
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">核心功能</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">功能矩阵</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">交互模式</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">统一入口</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section id="problem" class="problem-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">The Problem</div>
+                <h2>为什么需要AI智能助手？</h2>
+                <p>在AI技术快速发展的今天，用户在使用AI工具时面临着多重挑战</p>
+            </div>
+            <div class="pain-points-grid">
+                <div class="pain-point-card reveal reveal-delay-1">
+                    <div class="pain-point-icon">🔧</div>
+                    <h3>工具碎片化</h3>
+                    <p>用户需要在不同APP间切换才能使用聊天、写作、翻译等不同AI功能，打断工作流，降低效率。</p>
+                </div>
+                <div class="pain-point-card reveal reveal-delay-2">
+                    <div class="pain-point-icon">📚</div>
+                    <h3>学习成本高</h3>
+                    <p>每款AI工具有独立的操作逻辑和界面，用户需要花费大量时间学习不同工具，增加使用门槛。</p>
+                </div>
+                <div class="pain-point-card reveal reveal-delay-3">
+                    <div class="pain-point-icon">🔗</div>
+                    <h3>场景割裂</h3>
+                    <p>对话、创作、信息获取等场景无法自然衔接，用户需要重复输入上下文信息，体验断裂。</p>
+                </div>
+                <div class="pain-point-card reveal reveal-delay-1">
+                    <div class="pain-point-icon">📝</div>
+                    <h3>历史管理困难</h3>
+                    <p>跨设备的对话记录和创作内容难以统一管理和查找，重要内容容易丢失，无法快速回顾。</p>
+                </div>
+                <div class="pain-point-card reveal reveal-delay-2">
+                    <div class="pain-point-icon">🎤</div>
+                    <h3>语音交互缺失</h3>
+                    <p>多数AI工具仅支持文本输入，无法满足移动场景、驾驶、手部占用等场景下的便捷输入需求。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Personas -->
+    <section id="personas" class="personas-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">User Personas</div>
+                <h2>我们为谁设计？</h2>
+                <p>深入了解目标用户群体的需求、目标和痛点</p>
+            </div>
+            <div class="personas-grid">
+                <div class="persona-card primary reveal reveal-delay-1">
+                    <span class="persona-tag">Primary</span>
+                    <h3>职场创作者</h3>
+                    <p class="persona-description">25-35岁的知识工作者，需要高效完成写作、翻译、内容创作等任务</p>
+                    <ul class="persona-goals">
+                        <li>快速生成高质量文案和报告</li>
+                        <li>多语言翻译与内容本地化</li>
+                        <li>随时获取灵感和创意支持</li>
+                    </ul>
+                </div>
+                <div class="persona-card secondary reveal reveal-delay-2">
+                    <span class="persona-tag">Secondary</span>
+                    <h3>学生研究者</h3>
+                    <p class="persona-description">18-25岁的学生群体，需要AI辅助学习、研究和知识获取</p>
+                    <ul class="persona-goals">
+                        <li>快速获取准确信息和知识</li>
+                        <li>论文写作与资料整理</li>
+                        <li>图片文字提取与笔记整理</li>
+                    </ul>
+                </div>
+                <div class="persona-card extended reveal reveal-delay-3">
+                    <span class="persona-tag">Extended</span>
+                    <h3>科技探索者</h3>
+                    <p class="persona-description">30-45岁的科技爱好者，乐于尝试最新的AI技术和产品</p>
+                    <ul class="persona-goals">
+                        <li>体验前沿AI技术能力</li>
+                        <li>多模态交互与语音对话</li>
+                        <li>个性化AI助手定制</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Journey -->
+    <section id="journey" class="journey-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">User Journey</div>
+                <h2>用户旅程地图</h2>
+                <p>从发现问题到解决问题的完整体验路径</p>
+            </div>
+            <div class="journey-steps">
+                <div class="journey-step reveal reveal-delay-1">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>触发需求</h3>
+                        <p>用户在工作或生活中遇到需要AI帮助的场景：写作、翻译、问答等</p>
+                        <div class="step-pain-point">痛点：不知道该使用哪个AI工具</div>
+                    </div>
+                </div>
+                <div class="journey-step reveal reveal-delay-2">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>打开应用</h3>
+                        <p>启动AI智能助手，看到熟悉的对话界面和功能标签</p>
+                        <div class="step-pain-point">痛点：担心功能复杂找不到入口</div>
+                    </div>
+                </div>
+                <div class="journey-step reveal reveal-delay-3">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>选择功能</h3>
+                        <p>通过底部标签或直接对话选择所需功能，输入文本、语音或图片</p>
+                        <div class="step-pain-point">痛点：希望输入方式灵活多样</div>
+                    </div>
+                </div>
+                <div class="journey-step reveal reveal-delay-1">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>获得结果</h3>
+                        <p>AI快速返回结果，用户可以复制、保存或继续对话深入</p>
+                        <div class="step-pain-point">痛点：需要结果易于保存和分享</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Stories -->
+    <section class="stories-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">User Stories</div>
+                <h2>用户故事</h2>
+                <p>从用户视角描述的功能需求</p>
+            </div>
+            <div class="stories-grid">
+                <div class="story-card reveal reveal-delay-1">
+                    <div class="story-role">As a 职场创作者</div>
+                    <h3>我想要快速生成工作邮件</h3>
+                    <p>So that 我可以节省时间，专注于更重要的工作内容，而不是纠结于措辞和格式。</p>
+                </div>
+                <div class="story-card reveal reveal-delay-2">
+                    <div class="story-role">As a 学生研究者</div>
+                    <h3>我想要上传图片并提取文字</h3>
+                    <p>So that 我可以快速整理纸质笔记和资料，方便后续学习和复习。</p>
+                </div>
+                <div class="story-card reveal reveal-delay-3">
+                    <div class="story-role">As a 职场创作者</div>
+                    <h3>我想要用语音与AI对话</h3>
+                    <p>So that 我在通勤或手忙时也能获取AI帮助，无需打字输入。</p>
+                </div>
+                <div class="story-card reveal reveal-delay-1">
+                    <div class="story-role">As a 科技探索者</div>
+                    <h3>我想要查看历史对话记录</h3>
+                    <p>So that 我可以回顾之前的内容和创作，找到有用的信息。</p>
+                </div>
+                <div class="story-card reveal reveal-delay-2">
+                    <div class="story-role">As a 学生研究者</div>
+                    <h3>我想要翻译外文资料</h3>
+                    <p>So that 我可以理解和使用全球的知识资源，突破语言障碍。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Features & Demo</div>
+                <h2>核心功能</h2>
+                <p>精心设计的功能模块，覆盖AI应用的各个场景</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal reveal-delay-1">
+                    <span class="feature-badge core">CORE</span>
+                    <div class="feature-icon">💬</div>
+                    <h3>智能对话</h3>
+                    <p>基于大语言模型的多轮对话能力，上下文理解，自然流畅的交互体验</p>
+                    <div class="feature-metric">支持50+轮连续对话</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <span class="feature-badge core">CORE</span>
+                    <div class="feature-icon">📜</div>
+                    <h3>历史记录</h3>
+                    <p>侧边栏管理所有对话历史，快速搜索、回顾和继续之前的对话</p>
+                    <div class="feature-metric">永久保存，跨设备同步</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-3">
+                    <span class="feature-badge ai">AI</span>
+                    <div class="feature-icon">✍️</div>
+                    <h3>AI写作</h3>
+                    <p>文案生成、邮件撰写、报告输出，多种写作模板，一键生成高质量内容</p>
+                    <div class="feature-metric">提升写作效率5倍+</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-1">
+                    <span class="feature-badge ai">AI</span>
+                    <div class="feature-icon">🖼️</div>
+                    <h3>图片生成</h3>
+                    <p>文本描述生成创意图片，支持多种风格和尺寸，激发视觉创意</p>
+                    <div class="feature-metric">30秒内生成高清图片</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <span class="feature-badge ai">AI</span>
+                    <div class="feature-icon">🔍</div>
+                    <h3>图片转文字</h3>
+                    <p>强大的OCR能力，精准识别图片中的文字，支持多语言识别</p>
+                    <div class="feature-metric">识别准确率达98%+</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-3">
+                    <span class="feature-badge ux">UX</span>
+                    <div class="feature-icon">🎤</div>
+                    <h3>语音交互</h3>
+                    <p>语音输入和语音输出，解放双手，适合移动场景和驾驶环境</p>
+                    <div class="feature-metric">支持中英文语音</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-1">
+                    <span class="feature-badge core">CORE</span>
+                    <div class="feature-icon">🌐</div>
+                    <h3>多语言翻译</h3>
+                    <p>支持中英日韩等多种语言的互译，准确传达语义和文化内涵</p>
+                    <div class="feature-metric">支持20+语言对</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <span class="feature-badge core">CORE</span>
+                    <div class="feature-icon">🌤️</div>
+                    <h3>天气查询</h3>
+                    <p>实时天气信息查询，支持全球城市，提供详细的天气预报和建议</p>
+                    <div class="feature-metric">覆盖全球3000+城市</div>
+                </div>
+                <div class="feature-card reveal reveal-delay-3">
+                    <span class="feature-badge ux">UX</span>
+                    <div class="feature-icon">🏷️</div>
+                    <h3>标签导航</h3>
+                    <p>底部标签页设计，功能间无缝切换，单手操作友好</p>
+                    <div class="feature-metric">1次点击即可切换</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Architecture -->
+    <section id="architecture" class="architecture-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Technical Architecture</div>
+                <h2>技术架构</h2>
+                <p>可扩展、高性能的系统设计</p>
+            </div>
+
+            <div class="architecture-diagram reveal">
+                <div class="arch-layer">
+                    <div class="arch-label">用户交互层</div>
+                    <div class="arch-components">
+                        <div class="arch-component user">Web 应用</div>
+                        <div class="arch-component user">移动端</div>
+                        <div class="arch-component user">语音接口</div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">↓</div>
+
+                <div class="arch-layer">
+                    <div class="arch-label">应用服务层</div>
+                    <div class="arch-components">
+                        <div class="arch-component app">对话管理</div>
+                        <div class="arch-component app">用户服务</div>
+                        <div class="arch-component app">内容审核</div>
+                        <div class="arch-component app">历史记录</div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">↓</div>
+
+                <div class="arch-layer">
+                    <div class="arch-label">AI处理层</div>
+                    <div class="arch-components">
+                        <div class="arch-component processing">LLM引擎</div>
+                        <div class="arch-component processing">图像生成</div>
+                        <div class="arch-component processing">OCR识别</div>
+                        <div class="arch-component processing">语音识别</div>
+                        <div class="arch-component processing">翻译服务</div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">↓</div>
+
+                <div class="arch-layer">
+                    <div class="arch-label">数据存储层</div>
+                    <div class="arch-components">
+                        <div class="arch-component storage">用户数据库</div>
+                        <div class="arch-component storage">对话存储</div>
+                        <div class="arch-component storage">文件存储</div>
+                        <div class="arch-component storage">缓存层</div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">↓</div>
+
+                <div class="arch-layer">
+                    <div class="arch-label">数据管道层</div>
+                    <div class="arch-components">
+                        <div class="arch-component data">API网关</div>
+                        <div class="arch-component data">消息队列</div>
+                        <div class="arch-component data">日志收集</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-stack reveal">
+                <div class="tech-badge">React / Vue.js</div>
+                <div class="tech-badge">Node.js / Python</div>
+                <div class="tech-badge">PostgreSQL</div>
+                <div class="tech-badge">Redis</div>
+                <div class="tech-badge">OpenAI API</div>
+                <div class="tech-badge">WebSocket</div>
+                <div class="tech-badge">Docker</div>
+                <div class="tech-badge">Nginx</div>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-card reveal reveal-delay-1">
+                    <h3>⚡ 性能优化</h3>
+                    <p>采用分布式架构和缓存策略，支持高并发访问，响应时间控制在500ms以内。使用CDN加速静态资源，确保全球用户访问流畅。</p>
+                </div>
+                <div class="insight-card reveal reveal-delay-2">
+                    <h3>📈 可扩展性</h3>
+                    <p>模块化设计支持独立部署和扩展各个AI能力，新功能可快速集成。微服务架构确保系统可以根据负载弹性伸缩。</p>
+                </div>
+                <div class="insight-card reveal reveal-delay-3">
+                    <h3>🔒 安全性</h3>
+                    <p>端到端加密保护用户数据，内容审核机制防止滥用。遵循GDPR等数据保护法规，用户数据本地化存储。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Product Manager Portfolio | Generated with <a href="https://39ilcq.axshare.com" target="_blank">Axure Prototype</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
