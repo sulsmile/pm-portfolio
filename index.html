@@ -1532,6 +1532,7 @@
 
         // 用户分层详情数据（用于展示用户画像）
         const userSegmentationDetails = {
+            // Phiz Call 用户分层
             ana: {
                 name: "Ana",
                 age: "26岁",
@@ -1571,6 +1572,31 @@
                 coreNeeds: "协作功能、资料共享、记录存档",
                 usageScenario: "不定期学习小组讨论，30-60分钟群组通话+屏幕共享",
                 expectedFeatures: "高质量屏幕共享+通话链接分享"
+            },
+            // Phiz AI 用户分层
+            contentCreator: {
+                age: "22-30岁",
+                group: "内容创作活跃型",
+                identity: "22-30岁的社交达人，活跃的Phiz核心用户，日常频繁发朋友圈、分享内容",
+                coreNeeds: "持续产出高质量社交内容，提升个人影响力和互动率",
+                usageScenario: "每日创作朋友圈文案、生成配图、回复评论时用AI润色",
+                expectedFeatures: "快速生成朋友圈文案、创意图片生成、背景音乐创作、内容润色优化"
+            },
+            onDemandUser: {
+                age: "20-35岁",
+                group: "功能按需使用型",
+                identity: "20-35岁的社交用户，不常发内容但会浏览互动，偶尔有创作需求",
+                coreNeeds: "特定场景下需要AI辅助，解决临时性的创作或信息获取问题",
+                usageScenario: "节日/纪念日发一条精心准备的内容、需要翻译外语信息、OCR识别图片中的文字",
+                expectedFeatures: "多语言翻译、OCR图片识别、特定节日模板、语音输入（方便快速创作）"
+            },
+            lightInfoUser: {
+                age: "18-35岁",
+                group: "信息轻度获取型",
+                identity: "18-35岁的普通社交用户，主要用Phiz进行日常聊天，很少主动创作",
+                coreNeeds: "偶尔有临时需求，不想切换APP，期望便捷完成简单任务",
+                usageScenario: "偶尔查看每日新鲜事、简单问答（如天气查询）、翻译一句外文",
+                expectedFeatures: "基础问答、天气查询、简单翻译、接收每日新闻推送"
             }
         };
 
@@ -1635,24 +1661,43 @@
                         title = simpleMatch[1]; // 核心社交圈
                         const type = simpleMatch[2]; // 主要/次要/扩展
 
+                        // 根据项目类型选择不同的用户分层详情
+                        const isCallProject = project.name.includes('Call');
+
                         // 根据类型从 userSegmentationDetails 获取详细信息
                         let detailData = null;
-                        if (type === '主要' && userSegmentationDetails.ana) {
-                            detailData = userSegmentationDetails.ana;
-                        } else if (type === '次要' && userSegmentationDetails.lucas) {
-                            detailData = userSegmentationDetails.lucas;
-                        } else if (type === '扩展') {
-                            // 扩展有两个：mariana (轻社交) 和 julia (同好)
-                            if (title.includes('轻社交') && userSegmentationDetails.mariana) {
-                                detailData = userSegmentationDetails.mariana;
-                            } else if (title.includes('同好') && userSegmentationDetails.julia) {
-                                detailData = userSegmentationDetails.julia;
+                        if (isCallProject) {
+                            // Phiz Call 项目
+                            if (type === '主要' && userSegmentationDetails.ana) {
+                                detailData = userSegmentationDetails.ana;
+                            } else if (type === '次要' && userSegmentationDetails.lucas) {
+                                detailData = userSegmentationDetails.lucas;
+                            } else if (type === '扩展') {
+                                // 扩展有两个：mariana (轻社交) 和 julia (同好)
+                                if (title.includes('轻社交') && userSegmentationDetails.mariana) {
+                                    detailData = userSegmentationDetails.mariana;
+                                } else if (title.includes('同好') && userSegmentationDetails.julia) {
+                                    detailData = userSegmentationDetails.julia;
+                                }
+                            }
+                        } else {
+                            // Phiz AI 项目
+                            if (type === '主要' && userSegmentationDetails.contentCreator) {
+                                detailData = userSegmentationDetails.contentCreator;
+                            } else if (type === '次要' && userSegmentationDetails.onDemandUser) {
+                                detailData = userSegmentationDetails.onDemandUser;
+                            } else if (type === '扩展' && userSegmentationDetails.lightInfoUser) {
+                                detailData = userSegmentationDetails.lightInfoUser;
                             }
                         }
 
                         if (detailData) {
                             details.push({ icon: '👤', label: '身份：', text: detailData.identity });
-                            details.push({ icon: '📍', label: '年龄/城市：', text: `${detailData.age}，${detailData.location}` });
+                            if (detailData.location) {
+                                details.push({ icon: '📍', label: '年龄/城市：', text: `${detailData.age}，${detailData.location}` });
+                            } else {
+                                details.push({ icon: '🎂', label: '年龄：', text: detailData.age });
+                            }
                             details.push({ icon: '💡', label: '核心需求：', text: detailData.coreNeeds });
                             details.push({ icon: '📱', label: '使用场景：', text: detailData.usageScenario });
                             details.push({ icon: '⭐', label: '期望功能：', text: detailData.expectedFeatures });
@@ -1856,9 +1901,9 @@
 场景割裂：对话、创作、信息获取等场景无法自然衔接，用户需要重复输入上下文信息
 历史管理困难：对话记录和创作内容难以统一管理和查找，重要内容容易丢失
 交互引导缺失：单独的对话框，无法激起使用欲望，不知道能使用哪些AI功能`,
-            personas: `内容创作活跃型（主要）：22-30岁的社交达人，活跃的Phiz核心用户，日常频繁发朋友圈、分享内容，需求是持续产出高质量社交内容，提升个人影响力和互动率
-功能按需使用型（次要）：20-35岁的社交用户，不常发内容但会浏览互动，偶尔有创作需求，需求是特定场景下需要AI辅助，解决临时性的创作或信息获取问题
-信息轻度获取型（扩展）：18-35岁的普通社交用户，主要用Phiz进行日常聊天，很少主动创作，需求是偶尔有临时需求，不想切换APP，期望便捷完成简单任务`,
+            personas: `内容创作活跃型（主要）
+功能按需使用型（次要）
+信息轻度获取型（扩展）`,
             userJourney: `触发需求：用户在使用phiz时遇到需要AI帮助的场景，如写作、翻译、问答等，懒得切换工具
 打开应用：打开Phiz AI，看到熟悉的对话界面，和底部功能标签，界面简洁直观
 选择功能：通过底部标签页切换功能（对话、写作、图片等），或直接在对话界面输入，支持文本、语音、图片三种输入方式
