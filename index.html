@@ -1215,10 +1215,6 @@
                                     <textarea id="features" class="form-textarea" placeholder="智能对话：基于LLM的多轮对话&#10;AI写作：文案生成和邮件撰写"></textarea>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">技术架构</label>
-                                    <textarea id="architecture" class="form-textarea" placeholder="描述系统架构、技术栈和关键技术决策..."></textarea>
-                                </div>
 
                                 <div class="form-group">
                                     <label class="form-label">Axure 原型链接 *</label>
@@ -1382,22 +1378,6 @@
             </div>
         </section>
 
-        <!-- Architecture Section -->
-        <section id="architectureSection" class="detail-section">
-            <div class="container">
-                <div class="detail-section-header">
-                    <div class="detail-section-label">Technical Architecture</div>
-                    <h2 class="detail-section-title">技术架构</h2>
-                    <p class="detail-section-subtitle">可扩展、高性能的系统设计</p>
-                </div>
-                <div id="detailArchitecture" class="architecture-diagram">
-                    <!-- Architecture will be rendered here -->
-                </div>
-                <div id="detailTechStack" class="tech-stack">
-                    <!-- Tech stack badges will be rendered here -->
-                </div>
-            </div>
-        </section>
 
         <!-- Links Section -->
         <section class="detail-section">
@@ -1494,7 +1474,6 @@
                 document.getElementById('userJourney').value = project.userJourney || '';
                 document.getElementById('userStories').value = project.userStories || '';
                 document.getElementById('features').value = project.features || '';
-                document.getElementById('architecture').value = project.architecture || '';
                 document.getElementById('axureUrl').value = project.axureUrl;
                 document.getElementById('designUrl').value = project.designUrl || '';
             } else {
@@ -1791,18 +1770,6 @@
                 featuresSection.style.display = 'none';
             }
 
-            // Architecture
-            const architectureSection = document.getElementById('architectureSection');
-            if (project.architecture && project.architecture.trim()) {
-                architectureSection.style.display = 'block';
-                document.getElementById('detailArchitecture').innerHTML = `
-                    <p style="font-family:var(--font-display);font-size:16px;line-height:1.8;color:var(--color-muted);white-space:pre-wrap;">${escapeHtml(project.architecture)}</p>
-                `;
-            } else {
-                architectureSection.style.display = 'none';
-            }
-
-            document.getElementById('detailTechStack').innerHTML = '';
             document.getElementById('detailAxureBtn').href = project.axureUrl;
 
             const designBtn = document.getElementById('detailDesignBtn');
@@ -1828,7 +1795,6 @@
                 userJourney: document.getElementById('userJourney').value.trim(),
                 userStories: document.getElementById('userStories').value.trim(),
                 features: document.getElementById('features').value.trim(),
-                architecture: document.getElementById('architecture').value.trim(),
                 axureUrl: document.getElementById('axureUrl').value.trim(),
                 designUrl: document.getElementById('designUrl').value.trim(),
                 createdAt: new Date().toISOString()
@@ -1878,72 +1844,44 @@
         // 示例项目数组
         const sampleProjects = [];
 
-        // Phiz AI 智能助手项目（基于Axure原型12个功能模块+Q2用户研究）
+        // Phiz AI 智能助手项目
         const aiAssistantProject = {
-            name: "Phiz AI 智能助手",
-            tagline: "对话为核心、多模态扩展的智能助理",
+            name: "Phiz AI",
+            tagline: "集成在社交软件中的智能小助理",
             role: "产品经理",
-            description: "Phiz AI是一款基于大语言模型的全能AI智能助手应用，集成了对话、创作、信息获取等多种AI能力。我负责该项目从0到1的产品建设，完成用户调研、竞品分析、产品功能架构设计和PRD文档撰写。产品设计采用侧边栏历史记录、底部标签导航等关键交互模式，确保多功能的便捷切换与流畅使用体验。产品支持文本与语音的双向交互，集成OCR能力，并提供API接口便于后续功能扩展。",
-            stats: "12个核心功能模块, 多模态交互, 侧边栏历史, 底部标签导航",
+            description: "Phiz AI是一款集成在Phiz社交应用中的AI智能助手，为社交用户提供对话、创作、信息获取等多种AI能力。产品设计采用侧边栏历史记录、底部标签导航等交互模式，支持文本、语音、图片三种输入方式，让用户无需切换APP即可完成朋友圈文案生成、创意图片创作、音乐制作、OCR识别、多语言翻译等任务。通过打通APP内部链路，Phiz AI将AI能力无缝融入日常社交场景，帮助用户提升内容创作效率，增强社交互动体验。",
+            stats: "使用率提升35.4%, 用户转化率12%, 整体功能使用率第5位",
             painPoints: `工具碎片化：用户需要在不同APP间切换才能使用不同AI功能（聊天、写作、翻译等），增加操作成本
 学习成本高：每款AI工具有独立的操作逻辑和界面，用户需要花费时间学习新工具，降低使用意愿
 场景割裂：对话、创作、信息获取等场景无法自然衔接，用户需要重复输入上下文信息
-历史管理困难：跨设备的对话记录和创作内容难以统一管理和查找，重要内容容易丢失
-语音交互缺失：多数AI工具仅支持文本输入，无法满足移动场景和驾驶环境下的便捷输入需求`,
-            personas: `职场创作者（主要）：25-35岁的知识工作者，包括产品经理、市场营销人员、内容创作者，需要高效完成写作、翻译、内容创作等任务，目标是提升工作效率和产出质量
-学生研究者（次要）：18-25岁的学生群体，包括本科生、研究生，需要AI辅助学习、研究和知识获取，目标是快速获取准确信息并完成学术任务
-社交活跃者（扩展）：20-30岁的年轻用户，社交需求强烈，喜欢尝试新功能，乐于分享和互动，目标是体验AI技术并用于日常社交场景`,
-            userJourney: `触发需求：用户在工作或生活中遇到需要AI帮助的场景，如写作、翻译、问答等，但不知道该使用哪个工具
-打开应用：启动Phiz AI，看到熟悉的对话界面、侧边栏历史记录和底部功能标签，界面简洁直观
+历史管理困难：对话记录和创作内容难以统一管理和查找，重要内容容易丢失
+交互引导缺失：单独的对话框，无法激起使用欲望，不知道能使用哪些AI功能`,
+            personas: `内容创作活跃型（主要）：22-30岁的社交达人，活跃的Phiz核心用户，日常频繁发朋友圈、分享内容，需求是持续产出高质量社交内容，提升个人影响力和互动率
+功能按需使用型（次要）：20-35岁的社交用户，不常发内容但会浏览互动，偶尔有创作需求，需求是特定场景下需要AI辅助，解决临时性的创作或信息获取问题
+信息轻度获取型（扩展）：18-35岁的普通社交用户，主要用Phiz进行日常聊天，很少主动创作，需求是偶尔有临时需求，不想切换APP，期望便捷完成简单任务`,
+            userJourney: `触发需求：用户在使用phiz时遇到需要AI帮助的场景，如写作、翻译、问答等，懒得切换工具
+打开应用：打开Phiz AI，看到熟悉的对话界面，和底部功能标签，界面简洁直观
 选择功能：通过底部标签页切换功能（对话、写作、图片等），或直接在对话界面输入，支持文本、语音、图片三种输入方式
-获得结果：AI快速返回结果，用户可以复制保存、继续对话深入，或在侧边栏查看历史记录，支持跨设备同步`,
-            userStories: `作为职场创作者，我想要快速生成工作邮件和报告，以便节省时间专注于更重要的工作内容
-作为学生研究者，我想要上传图片并提取文字（OCR），以便快速整理纸质笔记和资料，方便后续学习
-作为职场创作者，我想要用语音与AI对话，以便在通勤或手忙时也能获取AI帮助，无需打字输入
-作为社交活跃者，我想要查看历史对话记录，以便回顾之前的内容和创作，找到有用的信息
-作为学生研究者，我想要翻译外文资料，以便理解和使用全球的知识资源，突破语言障碍`,
+获得结果：AI快速返回结果，用户可以复制保存、继续对话深入，或在侧边栏查看历史记录`,
+            userStories: `作为内容创作活跃型用户，我想要快速生成吸引人的朋友圈文案和配图，以便在日常生活中持续分享生活点滴，获得更多点赞和评论
+作为功能按需使用型用户，我想要OCR识别图片中的文字，以便快速提取朋友分享的图片中的有用信息，无需手动输入
+作为信息轻度获取型用户，我想要快速查询天气信息，以便和朋友确认出行计划时不用切换天气APP
+作为信息轻度获取型用户，我想要查看每日新鲜事，以便在和朋友聊天时有话题可聊，融入社交互动`,
             features: `基本聊天功能：基于大语言模型的多轮对话能力，支持上下文理解，准确响应率高
-历史记录侧边栏：管理所有对话历史，快速搜索、回顾和继续之前的对话，永久保存并跨设备同步
-底部标签导航：对话、写作、图片、新闻等功能的便捷切换，单手操作友好，一键切换
-AI写作：文案生成、邮件撰写、报告输出，多种写作模板，一键生成高质量内容，提升写作效率
+历史记录侧边栏：管理所有对话历史，快速搜索、回顾和继续之前的对话
+底部标签导航：写作、创作图片、生成音乐、新闻等功能的便捷切换
+写作：文案生成、邮件撰写、报告输出，多种写作模板，一键生成高质量内容，提升写作效率
 图片生成：文本描述生成创意图片，支持多种风格和尺寸，快速生成高清图片
-图片转文字（OCR）：强大的OCR能力，精准识别图片中的文字，识别准确率高
-发送语音：语音输入功能，解放双手，适合移动场景和驾驶环境
+图片转文字：强大的OCR能力，精准识别图片内容，并回答相关问题
+创作音乐：接入API,生成多种风格的音乐
 语音聊天：实时语音对话，流式识别和反馈，自然的语音交互体验
-多语言翻译：支持中英日韩等多种语言的互译，准确传达语义和文化内涵
-查询天气：实时天气信息查询，支持全球城市，提供详细的天气预报和建议
-每日新鲜事：个性化新闻推荐，基于用户兴趣和对话历史，智能推送相关资讯
-新闻后台：内容管理和发布系统，支持新闻源配置和内容审核，保障内容质量`,
-            architecture: `Phiz AI采用微服务架构，确保高可用和可扩展性：
-
-【用户交互层】
-Web应用：Vue3 + TypeScript单页应用，响应式设计
-移动端：React Native跨平台应用
-语音接口：WebSocket实时通信，支持流式音频
-
-【应用服务层】
-对话管理：会话状态管理、上下文维护、多轮对话逻辑
-用户服务：用户认证、权限管理、个性化设置
-历史记录：对话存储、全文搜索、跨设备同步
-内容管理：新闻内容审核、发布和管理
-
-【AI处理层】
-LLM引擎：大语言模型API，支持流式输出
-图像生成：图片生成API，多风格图片生成
-OCR识别：文字识别API，多语言文字识别
-语音识别：实时语音转文字
-翻译服务：多语言互译服务
-
-【数据存储层】
-用户数据库：存储用户信息和设置
-对话存储：灵活的对话历史存储
-文件存储：图片和文件管理
-缓存层：热点数据缓存，提升响应速度
-
-技术栈：Vue3, TypeScript, WebSocket, Node.js, Python, API集成`,
+多语言翻译：支持葡语，西班牙语等多种语言的互译，准确传达语义和文化内涵
+查询天气：实时天气信息查询，支持南美热门城市，提供详细的天气预报和建议
+每日新鲜事：抓取全球与巴西热点新闻，每日定时新闻推送。联动channel功能，打通APP链路
+新闻后台：内容管理和发布系统，支持内容审核和上下架管理，保障内容质量`,
             axureUrl: "https://39ilcq.axshare.com",
             designUrl: "",
-            createdAt: "2023.07 - 2025.01"
+            createdAt: "2025.06 - 2025.07"
         };
 
         // Phiz Call 音视频通话项目（根据飞书文档更新）
@@ -1974,40 +1912,6 @@ OCR识别：文字识别API，多语言文字识别
 通知系统优化：多通道推送保障（FCM+三星+APNs），确保不错过重要来电
 性能优化：推送通道优化、低端机型编解码优化、长时间通话电池优化
 社交关系链拓展：通话中邀请群外成员、临时邀请链接、通话链接社交分享、全选成员一键呼叫，降低社交组织成本`,
-            architecture: `Phiz Call采用分层架构，聚焦社交场景通话体验：
-
-【用户体验层】
-通话前体验：来电意图显示、预约通话、灵活回复模式、在线状态显示、虚拟背景准备
-通话中体验：网络断开预警、智能重连、弱网降级、网络状态可视化、高质量屏幕共享、实时标注
-通话后体验：通话结束原因提示、一键重拨、通话留言、AI通话摘要、待办事项提取、精彩瞬间切片
-
-【触达层】
-多级推送：长连接+FCM+OEM厂商通道多级降级
-秒级唤醒：APP精准唤醒、通话界面可靠拉起
-CallKit集成：系统级通话体验
-
-【核心功能层】
-1v1音视频：音频通话、视频通话、多态来电提醒
-群组通话：多人语音/视频、添加成员、群语音/群视频
-通话辅助：静音/开关摄像头、前后台切换保持、异常自动处理
-
-【AI智能中台】
-实时交互优化：AI降噪、音视频超分、实时美颜
-跨场景能力：实时字幕、语音翻译
-辅助智能：会议摘要、关键事项提取
-业务型智能：智能语音客服（仅业务场景）
-
-【调度层】
-房间管理：通话房间创建、加入、离开
-媒体协商：SDP协商、编解码协商
-资源调度：分布式部署、智能路由
-
-【传输层】
-自研RTC引擎（替换声网）：Demo可评估→可用性打底→可控替换→商业化承载→平台化拓展
-协议栈：WebRTC、RTP、RTCP、SRTP
-网络优化：QoS策略、动态码率、FEC前向纠错
-
-技术栈：WebRTC, 自研RTC引擎, Node.js, Python, 音视频编解码, AI语音/视觉模型`,
             axureUrl: "https://codesign.qq.com/s/627363398067674",
             designUrl: "",
             createdAt: "2024.12 - 2025.03"
