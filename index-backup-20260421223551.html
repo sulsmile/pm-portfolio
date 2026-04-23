@@ -456,13 +456,6 @@
             line-height: 1.8;
         }
 
-        .detail-hero-time {
-            font-size: 14px;
-            color: rgba(255,255,255, 0.5);
-            margin-top: var(--space-sm);
-            font-family: var(--font-mono);
-        }
-
         .detail-hero-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -587,7 +580,7 @@
             border-radius: var(--radius-md);
             padding: var(--space-xl);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             transition: all 0.3s var(--ease-out);
         }
 
@@ -680,6 +673,83 @@
             left: 0;
             color: #22c55e;
             font-weight: 700;
+        }
+
+        .persona-icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: var(--space-md);
+            line-height: 1;
+        }
+
+        .persona-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .persona-details {
+            margin-bottom: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .persona-detail-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 13px;
+            color: var(--color-black);
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-weight: 330;
+            line-height: 1.5;
+        }
+
+        .detail-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            width: 24px;
+            text-align: center;
+        }
+
+        .detail-text {
+            flex: 1;
+        }
+
+        .persona-card.primary .persona-detail-item {
+            border-left-color: #ec4899;
+            background: rgba(236, 72, 153, 0.05);
+        }
+
+        .persona-card.secondary .persona-detail-item {
+            border-left-color: #4a90d9;
+            background: rgba(74, 144, 217, 0.05);
+        }
+
+        .persona-card.extended .persona-detail-item {
+            border-left-color: #9b59b6;
+            background: rgba(155, 89, 182, 0.05);
+        }
+
+        .persona-card.tertiary::before {
+            background: #f59e0b;
+        }
+
+        .persona-card.tertiary .persona-tag {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .persona-card.tertiary .persona-detail-item {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
         }
 
         /* Journey Steps */
@@ -1096,36 +1166,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(0, 0, 0, 0.4);
         }
-
-        /* User Segmentation Details Styles */
-        .persona-details {
-            margin-top: var(--space-lg);
-        }
-
-        .persona-detail-item {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-sm);
-            font-family: var(--font-display);
-            font-size: 13px;
-            color: var(--color-muted);
-            line-height: 1.5;
-        }
-
-        .detail-icon {
-            flex-shrink: 0;
-            font-size: 14px;
-        }
-
-        .detail-text {
-            flex: 1;
-        }
-
-        .detail-label {
-            font-weight: 540;
-            color: var(--color-black);
-        }
     </style>
 </head>
 <body>
@@ -1305,7 +1345,6 @@
                 <h1 id="detailName">项目名称</h1>
                 <p id="detailTagline" class="detail-hero-tagline">项目标语</p>
                 <p id="detailDescription" class="detail-hero-description">项目描述</p>
-                <p id="detailTime" class="detail-hero-time"></p>
                 <div id="detailStats" class="detail-hero-stats">
                     <!-- Stats will be rendered here -->
                 </div>
@@ -1327,7 +1366,7 @@
         </section>
 
         <!-- Personas Section -->
-        <section id="personasSection" class="detail-section">
+        <section class="detail-section">
             <div class="container">
                 <div class="detail-section-header">
                     <div class="detail-section-label">User Personas</div>
@@ -1341,7 +1380,7 @@
         </section>
 
         <!-- Journey Section -->
-        <section id="journeySection" class="detail-section">
+        <section class="detail-section">
             <div class="container">
                 <div class="detail-section-header">
                     <div class="detail-section-label">User Journey</div>
@@ -1355,7 +1394,7 @@
         </section>
 
         <!-- Stories Section -->
-        <section id="storiesSection" class="detail-section" style="background: var(--color-black);">
+        <section class="detail-section" style="background: var(--color-black);">
             <div class="container">
                 <div class="detail-section-header">
                     <div class="detail-section-label" style="color: rgba(255,255,255,0.6);">User Stories</div>
@@ -1369,7 +1408,7 @@
         </section>
 
         <!-- Features Section -->
-        <section id="featuresSection" class="detail-section">
+        <section class="detail-section">
             <div class="container">
                 <div class="detail-section-header">
                     <div class="detail-section-label">Features & Demo</div>
@@ -1382,8 +1421,8 @@
             </div>
         </section>
 
-        <!-- Architecture Section -->
-        <section id="architectureSection" class="detail-section">
+        <!-- Architecture Section - 已隐藏 -->
+        <!-- <section class="detail-section">
             <div class="container">
                 <div class="detail-section-header">
                     <div class="detail-section-label">Technical Architecture</div>
@@ -1391,13 +1430,13 @@
                     <p class="detail-section-subtitle">可扩展、高性能的系统设计</p>
                 </div>
                 <div id="detailArchitecture" class="architecture-diagram">
-                    <!-- Architecture will be rendered here -->
+                    <!- Architecture will be rendered here -!>
                 </div>
                 <div id="detailTechStack" class="tech-stack">
-                    <!-- Tech stack badges will be rendered here -->
+                    <!- Tech stack badges will be rendered here -!>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Links Section -->
         <section class="detail-section">
@@ -1551,50 +1590,6 @@
             `).join('');
         }
 
-        // 用户分层详情数据（用于展示用户画像）
-        const userSegmentationDetails = {
-            ana: {
-                name: "Ana",
-                age: "26岁",
-                location: "圣保罗",
-                group: "核心社交圈",
-                identity: "市场营销专员，与异地恋男友交往2年",
-                coreNeeds: "高情感需求、异地维系、长时间通话需要网络稳定",
-                usageScenario: "每天晚上8-11点睡前通话，30-90分钟视频通话",
-                expectedFeatures: "网络断开预警、智能重连机制、弱网降级策略"
-            },
-            lucas: {
-                name: "Lucas",
-                age: "22岁",
-                location: "里约热内卢",
-                group: "扩展社交圈",
-                identity: "大学生，社交活跃",
-                coreNeeds: "组织便捷、趣味互动、体验流畅",
-                usageScenario: "每周2-3次朋友群聚会讨论，3-8人群组通话",
-                expectedFeatures: "网络状态可视化、通话中成员信息预览、临时邀人方便"
-            },
-            mariana: {
-                name: "Mariana",
-                age: "28岁",
-                location: "圣保罗",
-                group: "轻社交圈",
-                identity: "外贸业务员，偶尔与远房亲戚联系",
-                coreNeeds: "快速接通、简单易用、信息同步",
-                usageScenario: "每月1-2次节假日通话，5-15分钟1v1通话",
-                expectedFeatures: "灵活回复模式、快速加入"
-            },
-            julia: {
-                name: "Julia",
-                age: "24岁",
-                location: "圣保罗",
-                group: "同好社交圈",
-                identity: "平面设计师，加入设计学习小组",
-                coreNeeds: "协作功能、资料共享、记录存档",
-                usageScenario: "不定期学习小组讨论，30-60分钟群组通话+屏幕共享",
-                expectedFeatures: "高质量屏幕共享+通话链接分享"
-            }
-        };
-
         function renderProjectDetail(index) {
             const project = projects[index];
             if (!project) return;
@@ -1603,7 +1598,6 @@
             document.getElementById('detailName').textContent = project.name;
             document.getElementById('detailTagline').textContent = project.tagline || '';
             document.getElementById('detailDescription').textContent = project.description || '';
-            document.getElementById('detailTime').textContent = project.createdAt || '';
 
             // Stats
             const stats = project.stats ? project.stats.split(',').map(s => s.trim()) : [];
@@ -1636,80 +1630,85 @@
 
             // Personas
             const personas = project.personas ? project.personas.split('\n').filter(p => p.trim()) : [];
-            const personasSection = document.getElementById('personasSection');
             if (personas.length > 0) {
-                personasSection.style.display = 'block';
                 const types = ['primary', 'secondary', 'extended', 'tertiary'];
-                const labels = ['主要', '次要', '扩展', '扩展'];
-                const icons = ['❤️', '👥', '💬', '🎯'];
+                const labels = ['Primary', 'Secondary', 'Extended', 'Tertiary'];
 
                 document.getElementById('detailPersonas').innerHTML = personas.map((persona, i) => {
+                    const lines = persona.split('\n').filter(l => l.trim());
+                    let name = '用户画像';
                     let title = '';
                     let details = [];
+                    let icon = '';
 
-                    // 移除 ** 标记
-                    const cleanPersona = persona.replace(/\*\*/g, '').trim();
-
-                    // 简化格式处理 - 匹配如 "核心社交圈（主要）" 这样的格式
-                    const simpleMatch = cleanPersona.match(/^(.+?)（(.+?)）$/);
-                    if (simpleMatch) {
-                        title = simpleMatch[1]; // 核心社交圈
-                        const type = simpleMatch[2]; // 主要/次要/扩展
-
-                        // 根据类型从 userSegmentationDetails 获取详细信息
-                        let detailData = null;
-                        if (type === '主要' && userSegmentationDetails.ana) {
-                            detailData = userSegmentationDetails.ana;
-                        } else if (type === '次要' && userSegmentationDetails.lucas) {
-                            detailData = userSegmentationDetails.lucas;
-                        } else if (type === '扩展') {
-                            // 扩展有两个：mariana (轻社交) 和 julia (同好)
-                            if (title.includes('轻社交') && userSegmentationDetails.mariana) {
-                                detailData = userSegmentationDetails.mariana;
-                            } else if (title.includes('同好') && userSegmentationDetails.julia) {
-                                detailData = userSegmentationDetails.julia;
+                    // 解析用户画像
+                    lines.forEach(line => {
+                        // 提取标题（如：核心社交圈（主要））
+                        if (line.includes('（主要）') || line.includes('（次要）') || line.includes('（扩展）')) {
+                            title = line.trim();
+                            // 从标题中提取名称
+                            const match = title.match(/^(.+?)（/);
+                            if (match) {
+                                name = match[1].trim();
                             }
                         }
 
-                        if (detailData) {
-                            details.push({ icon: '👤', label: '身份：', text: detailData.identity });
-                            details.push({ icon: '📍', label: '年龄/城市：', text: `${detailData.age}，${detailData.location}` });
-                            details.push({ icon: '💡', label: '核心需求：', text: detailData.coreNeeds });
-                            details.push({ icon: '📱', label: '使用场景：', text: detailData.usageScenario });
-                            details.push({ icon: '⭐', label: '期望功能：', text: detailData.expectedFeatures });
+                        // 提取用户画像详细信息（如：Ana（26岁，圣保罗））
+                        const userMatch = line.match(/([A-Z][a-z]+)（(\d+)岁，(.+?)）/);
+                        if (userMatch) {
+                            const userName = userMatch[1];
+                            const age = userMatch[2];
+                            const location = userMatch[3];
+                            details.push({ icon: '👤', text: `${userName}，${age}岁，${location}` });
                         }
-                    } else {
-                        // 尝试匹配完整格式（旧版兼容）
-                        const mainMatch = cleanPersona.match(/^(.+?)（(.+?)）：(.+?)，如([A-Z][a-z]+)（(\d+)岁，(.+?)），(.+?)，需求是(.+)/);
-                        if (mainMatch) {
-                            title = mainMatch[1];
-                            const groupDesc = mainMatch[3];
-                            const name = mainMatch[4];
-                            const age = mainMatch[5];
-                            const location = mainMatch[6];
-                            const restPart = mainMatch[7];
-                            const needs = mainMatch[8];
 
-                            details.push({ icon: '👥', label: '人群：', text: groupDesc });
-                            details.push({ icon: '👤', label: '代表用户：', text: `${name}，${age}岁，${location}` });
-                            details.push({ icon: '🎯', label: '核心需求：', text: restPart });
-                            details.push({ icon: '⭐', label: '期望功能：', text: needs });
-                        } else {
-                            title = cleanPersona;
+                        // 提取身份信息
+                        if (line.includes('身份：') || line.includes('身份:')) {
+                            const identity = line.split(/[:：]/)[1]?.trim();
+                            if (identity) details.push({ icon: '💼', text: identity });
                         }
+
+                        // 提取需求
+                        if (line.includes('需求是')) {
+                            const need = line.split(/需求是/)[1]?.trim();
+                            if (need) details.push({ icon: '🎯', text: need });
+                        }
+
+                        // 提取使用场景
+                        if (line.includes('每晚视频') || line.includes('每周聚会') || line.includes('月度家庭通话') || line.includes('设计小组讨论')) {
+                            details.push({ icon: '📅', text: line.trim() });
+                        }
+
+                        // 提取期望功能
+                        if (line.includes('期望') || line.includes('，期望')) {
+                            const expect = line.split(/，期望|期望/)[1]?.trim() || line.split(/，期望/)[1]?.trim();
+                            if (expect) details.push({ icon: '✨', text: expect });
+                        }
+                    });
+
+                    // 如果没有解析到详细信息，尝试从单行提取
+                    if (details.length === 0 && lines.length === 1) {
+                        const [namePart, ...descParts] = persona.split('：');
+                        name = namePart.trim() || name;
+                        details.push({ icon: '📝', text: descParts.join('：') || persona });
                     }
+
+                    // 根据类型设置图标
+                    const icons = ['❤️', '👥', '💬', '🎯'];
+                    icon = icons[i % icons.length];
 
                     return `
                         <div class="persona-card ${types[i % types.length]}">
-                            <div class="persona-icon">${icons[i % icons.length]}</div>
+                            <div class="persona-icon">${icon}</div>
                             <span class="persona-tag">${labels[i % labels.length]}</span>
-                            <h3>${escapeHtml(title)}</h3>
+                            <h3>${escapeHtml(name)}</h3>
+                            ${title ? `<p class="persona-title">${escapeHtml(title)}</p>` : ''}
                             ${details.length > 0 ? `
                             <div class="persona-details">
                                 ${details.map(detail => `
                                     <div class="persona-detail-item">
                                         <span class="detail-icon">${detail.icon}</span>
-                                        <span class="detail-text"><span class="detail-label">${detail.label}</span>${escapeHtml(detail.text)}</span>
+                                        <span class="detail-text">${escapeHtml(detail.text)}</span>
                                     </div>
                                 `).join('')}
                             </div>
@@ -1718,14 +1717,12 @@
                     `;
                 }).join('');
             } else {
-                personasSection.style.display = 'none';
+                document.getElementById('detailPersonas').innerHTML = '<p style="text-align:center;color:var(--color-muted);">暂无用户画像</p>';
             }
 
             // Journey
             const journey = project.userJourney ? project.userJourney.split('\n').filter(j => j.trim()) : [];
-            const journeySection = document.getElementById('journeySection');
             if (journey.length > 0) {
-                journeySection.style.display = 'block';
                 document.getElementById('detailJourney').innerHTML = journey.map((step, i) => {
                     const [title, ...descParts] = step.split('：');
                     const desc = descParts.join('：') || '';
@@ -1740,14 +1737,12 @@
                     `;
                 }).join('');
             } else {
-                journeySection.style.display = 'none';
+                document.getElementById('detailJourney').innerHTML = '<p style="text-align:center;color:var(--color-muted);">暂无用户旅程</p>';
             }
 
             // Stories
             const stories = project.userStories ? project.userStories.split('\n').filter(s => s.trim()) : [];
-            const storiesSection = document.getElementById('storiesSection');
             if (stories.length > 0) {
-                storiesSection.style.display = 'block';
                 document.getElementById('detailStories').innerHTML = stories.map(story => {
                     const roleMatch = story.match(/作为(.+?)，/);
                     const actionMatch = story.match(/我想要(.+?)，/);
@@ -1765,14 +1760,12 @@
                     `;
                 }).join('');
             } else {
-                storiesSection.style.display = 'none';
+                document.getElementById('detailStories').innerHTML = '<p style="text-align:center;color:rgba(255,255,255,0.7);">暂无用户故事</p>';
             }
 
             // Features
             const features = project.features ? project.features.split('\n').filter(f => f.trim()) : [];
-            const featuresSection = document.getElementById('featuresSection');
             if (features.length > 0) {
-                featuresSection.style.display = 'block';
                 const badges = ['core', 'ai', 'ux'];
                 const icons = ['💬', '✨', '🎯'];
                 document.getElementById('detailFeatures').innerHTML = features.map((feature, i) => {
@@ -1788,18 +1781,16 @@
                     `;
                 }).join('');
             } else {
-                featuresSection.style.display = 'none';
+                document.getElementById('detailFeatures').innerHTML = '<p style="text-align:center;color:var(--color-muted);">暂无功能描述</p>';
             }
 
             // Architecture
-            const architectureSection = document.getElementById('architectureSection');
             if (project.architecture && project.architecture.trim()) {
-                architectureSection.style.display = 'block';
                 document.getElementById('detailArchitecture').innerHTML = `
                     <p style="font-family:var(--font-display);font-size:16px;line-height:1.8;color:var(--color-muted);white-space:pre-wrap;">${escapeHtml(project.architecture)}</p>
                 `;
             } else {
-                architectureSection.style.display = 'none';
+                document.getElementById('detailArchitecture').innerHTML = '<p style="text-align:center;color:var(--color-muted);">暂无架构描述</p>';
             }
 
             document.getElementById('detailTechStack').innerHTML = '';
@@ -1946,7 +1937,7 @@ OCR识别：文字识别API，多语言文字识别
             createdAt: "2023.07 - 2025.01"
         };
 
-        // Phiz Call 音视频通话项目（根据飞书文档更新）
+        // Phiz Call 音视频通话项目（基于Q2规划真实用户研究）
         const phizCallProject = {
             name: "Phiz Call 音视频通话",
             tagline: "社交场景的有温度通话工具",
@@ -1957,14 +1948,14 @@ OCR识别：文字识别API，多语言文字识别
 网络异常痛点：通话突然断开，不知道是网络问题还是对方挂断，情感交流被打断，产生焦虑
 基础体验较差：通话整体流程和细节体验与成熟产品存在差距，通话状态变更，快捷回复，通话结束场景等细节考虑不足
 社交关系链拓展困难：想邀请朋友加入通话但不在群里，需要逐个私聊邀请，操作繁琐`,
-            personas: `核心社交圈（主要）
-扩展社交圈（次要）
-轻社交圈（扩展）
-同好社交圈（扩展）`,
-            userJourney: `情感维系场景（Ana异地睡前视频）：晚上10点习惯性检查手机→整理背景调整光线→点击视频通话等待接听→分享今天的事以及情感交流→互道晚安带着满足感入睡（痛点：通话异常结束）
-朋友聚会讨论（Lucas组织朋友群）：计划周末聚会需要协调→在朋友群组通话→讨论时间地点投票决定→确认计划分享到群里（痛点：通话不稳定）
+            personas: `核心社交圈（主要）：家人、恋人、闺蜜，如Ana（26岁，圣保罗），身份：市场营销专员，与异地恋男友交往2年，需求是情感维系、连接稳定、长时间通话不断线，每晚视频30-90分钟，期望网络断开预警、智能重连机制、弱网降级策略
+扩展社交圈（次要）：朋友、同学、同事，如Lucas（22岁，里约热内卢），身份：大学生，社交活跃，每周聚会2-3次，需求是组织便捷、氛围活跃、体验流畅不卡顿，期望网络状态可视化、通话中成员信息预览、临时邀人方便
+轻社交圈（扩展）：偶尔联系的弱关系，如Mariana（28岁，圣保罗），身份：外贸业务员，偶尔与远房亲戚联系，需求是快速接通、简单易用、不打扰，期望灵活回复模式、快速加入
+同好社交圈（扩展）：兴趣社群、学习小组，如Julia（24岁，圣保罗），身份：平面设计师，加入设计学习小组，需求是高效协作、工具丰富，期望高质量屏幕共享+通话链接分享`,
+            userJourney: `情感维系场景（Ana异地恋睡前视频）：晚上10点习惯性检查手机→整理背景调整光线→点击视频通话等待接听→分享今天的事以及情感交流→互道晚安带着满足感入睡（痛点：通话异常结束）
+朋友聚会讨论（Lucas组织朋友群）：计划周末聚会需要协调→在朋友群发起群组通话→讨论时间地点投票决定→确认计划分享到群里（痛点：通话不稳定）
 临时问事协调（Mariana确认信息）：需要确认信息想到对方→直接拨打等待接听→询问问题得到答案→挂断（痛点：未能及时收到来电）
-学习小组讨论（Julia设计小组）：准备学习讨论整理议题→在学习群组通话→分享屏幕讨论作业→记录不完整需要手动记录（痛点：屏幕共享看不清，邀请更多成员加入步骤繁琐）`,
+学习小组讨论（Julia设计小组）：准备学习讨论整理议题→在学习群发起群组通话→分享屏幕讨论作业→记录不完整需要手动记录（痛点：屏幕共享看不清，邀请更多成员加入步骤繁琐）`,
             userStories: `作为核心社交圈用户（Ana），我想要网络断开预警和智能重连，以便避免情感交流突然中断的焦虑，保持通话连续性
 作为扩展社交圈用户（Lucas），我想要群通话便捷，快速的组织群通话
 作为轻社交圈用户（Mariana），我想要及时收到来电，通话稳定进行
@@ -1974,40 +1965,7 @@ OCR识别：文字识别API，多语言文字识别
 通知系统优化：多通道推送保障（FCM+三星+APNs），确保不错过重要来电
 性能优化：推送通道优化、低端机型编解码优化、长时间通话电池优化
 社交关系链拓展：通话中邀请群外成员、临时邀请链接、通话链接社交分享、全选成员一键呼叫，降低社交组织成本`,
-            architecture: `Phiz Call采用分层架构，聚焦社交场景通话体验：
-
-【用户体验层】
-通话前体验：来电意图显示、预约通话、灵活回复模式、在线状态显示、虚拟背景准备
-通话中体验：网络断开预警、智能重连、弱网降级、网络状态可视化、高质量屏幕共享、实时标注
-通话后体验：通话结束原因提示、一键重拨、通话留言、AI通话摘要、待办事项提取、精彩瞬间切片
-
-【触达层】
-多级推送：长连接+FCM+OEM厂商通道多级降级
-秒级唤醒：APP精准唤醒、通话界面可靠拉起
-CallKit集成：系统级通话体验
-
-【核心功能层】
-1v1音视频：音频通话、视频通话、多态来电提醒
-群组通话：多人语音/视频、添加成员、群语音/群视频
-通话辅助：静音/开关摄像头、前后台切换保持、异常自动处理
-
-【AI智能中台】
-实时交互优化：AI降噪、音视频超分、实时美颜
-跨场景能力：实时字幕、语音翻译
-辅助智能：会议摘要、关键事项提取
-业务型智能：智能语音客服（仅业务场景）
-
-【调度层】
-房间管理：通话房间创建、加入、离开
-媒体协商：SDP协商、编解码协商
-资源调度：分布式部署、智能路由
-
-【传输层】
-自研RTC引擎（替换声网）：Demo可评估→可用性打底→可控替换→商业化承载→平台化拓展
-协议栈：WebRTC、RTP、RTCP、SRTP
-网络优化：QoS策略、动态码率、FEC前向纠错
-
-技术栈：WebRTC, 自研RTC引擎, Node.js, Python, 音视频编解码, AI语音/视觉模型`,
+            architecture: "",
             axureUrl: "https://codesign.qq.com/s/627363398067674",
             designUrl: "",
             createdAt: "2024.12 - 2025.03"
@@ -2028,22 +1986,10 @@ CallKit集成：系统级通话体验
             loadProjects();
             console.log('localStorage加载后项目数:', projects.length);
 
-            // 如果localStorage为空或项目数为0，初始化示例项目
-            if (projects.length === 0) {
-                console.log('localStorage为空，初始化示例项目...');
-                projects = [...sampleProjects]; // 直接使用全局定义的sampleProjects
-                saveProjects();
-                console.log('已保存示例项目，项目数:', projects.length);
-            } else {
-                // 仅当示例项目不存在时才添加，避免覆盖用户修改的数据
-                sampleProjects.forEach(sample => {
-                    const index = projects.findIndex(p => p.name === sample.name);
-                    if (index < 0) {
-                        projects.push(sample);
-                    }
-                });
-                saveProjects();
-            }
+            // 强制使用最新的示例项目数据（确保同步飞书文档）
+            projects = [...sampleProjects];
+            saveProjects();
+            console.log('已更新为最新示例项目，项目数:', projects.length);
 
             console.log('最终项目数:', projects.length);
 
