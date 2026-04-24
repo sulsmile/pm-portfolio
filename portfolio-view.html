@@ -1404,6 +1404,36 @@
                 coreNeeds: "协作功能、资料共享、记录存档",
                 usageScenario: "不定期学习小组讨论，30-60分钟群组通话+屏幕共享",
                 expectedFeatures: "高质量屏幕共享+通话链接分享"
+            },
+            contentCreator: {
+                name: "内容创作者",
+                age: "22-30岁",
+                location: "一线城市",
+                group: "内容创作活跃型",
+                identity: "社交达人，活跃的Phiz核心用户，日常频繁发朋友圈、分享内容",
+                coreNeeds: "持续产出高质量社交内容，提升个人影响力和互动率",
+                usageScenario: "日常创作朋友圈文案、生成创意图片、制作音乐等",
+                expectedFeatures: "快速生成高质量内容，提升创作效率"
+            },
+            onDemandUser: {
+                name: "按需用户",
+                age: "20-35岁",
+                location: "各线城市",
+                group: "功能按需使用型",
+                identity: "不常发内容但会浏览互动的社交用户",
+                coreNeeds: "特定场景下需要AI辅助，解决临时性的创作或信息获取问题",
+                usageScenario: "偶尔有创作需求，如OCR识别、翻译、问答等",
+                expectedFeatures: "特定场景下的便捷AI功能"
+            },
+            lightInfoUser: {
+                name: "轻度用户",
+                age: "18-35岁",
+                location: "各线城市",
+                group: "信息轻度获取型",
+                identity: "普通社交用户，主要用Phiz进行日常聊天",
+                coreNeeds: "偶尔有临时需求，不想切换APP，期望便捷完成简单任务",
+                usageScenario: "查询天气、新闻等简单任务",
+                expectedFeatures: "便捷快速完成简单任务"
             }
         };
 
@@ -1470,16 +1500,30 @@
 
                         // 根据类型从 userSegmentationDetails 获取详细信息
                         let detailData = null;
-                        if (type === '主要' && userSegmentationDetails.ana) {
-                            detailData = userSegmentationDetails.ana;
-                        } else if (type === '次要' && userSegmentationDetails.lucas) {
-                            detailData = userSegmentationDetails.lucas;
-                        } else if (type === '扩展') {
-                            // 扩展有两个：mariana (轻社交) 和 julia (同好)
-                            if (title.includes('轻社交') && userSegmentationDetails.mariana) {
-                                detailData = userSegmentationDetails.mariana;
-                            } else if (title.includes('同好') && userSegmentationDetails.julia) {
-                                detailData = userSegmentationDetails.julia;
+                        const isAIProject = project.name.includes('Phiz AI');
+
+                        if (isAIProject) {
+                            // AI 项目使用 contentCreator、onDemandUser、lightInfoUser
+                            if (type === '主要' && userSegmentationDetails.contentCreator) {
+                                detailData = userSegmentationDetails.contentCreator;
+                            } else if (type === '次要' && userSegmentationDetails.onDemandUser) {
+                                detailData = userSegmentationDetails.onDemandUser;
+                            } else if (type === '扩展' && userSegmentationDetails.lightInfoUser) {
+                                detailData = userSegmentationDetails.lightInfoUser;
+                            }
+                        } else {
+                            // Call 项目使用 ana、lucas、mariana、julia
+                            if (type === '主要' && userSegmentationDetails.ana) {
+                                detailData = userSegmentationDetails.ana;
+                            } else if (type === '次要' && userSegmentationDetails.lucas) {
+                                detailData = userSegmentationDetails.lucas;
+                            } else if (type === '扩展') {
+                                // 扩展有两个：mariana (轻社交) 和 julia (同好)
+                                if (title.includes('轻社交') && userSegmentationDetails.mariana) {
+                                    detailData = userSegmentationDetails.mariana;
+                                } else if (title.includes('同好') && userSegmentationDetails.julia) {
+                                    detailData = userSegmentationDetails.julia;
+                                }
                             }
                         }
 
@@ -1592,7 +1636,6 @@
                     const desc = descParts.join('：') || '';
                     return `
                         <div class="feature-card">
-                            <span class="feature-badge ${badges[i % badges.length]}">${badges[i % badges.length]}</span>
                             <div class="feature-icon">${icons[i % icons.length]}</div>
                             <h3>${escapeHtml(name.trim())}</h3>
                             <p>${escapeHtml(desc.trim())}</p>
@@ -1635,9 +1678,9 @@
 场景割裂：对话、创作、信息获取等场景无法自然衔接，用户需要重复输入上下文信息
 历史管理困难：对话记录和创作内容难以统一管理和查找，重要内容容易丢失
 交互引导缺失：单独的对话框，无法激起使用欲望，不知道能使用哪些AI功能`,
-            personas: `内容创作活跃型（主要）：22-30岁的社交达人，活跃的Phiz核心用户，日常频繁发朋友圈、分享内容，需求是持续产出高质量社交内容，提升个人影响力和互动率
-功能按需使用型（次要）：20-35岁的社交用户，不常发内容但会浏览互动，偶尔有创作需求，需求是特定场景下需要AI辅助，解决临时性的创作或信息获取问题
-信息轻度获取型（扩展）：18-35岁的普通社交用户，主要用Phiz进行日常聊天，很少主动创作，需求是偶尔有临时需求，不想切换APP，期望便捷完成简单任务`,
+            personas: `内容创作活跃型（主要）
+功能按需使用型（次要）
+信息轻度获取型（扩展）`,
             userJourney: `触发需求：用户在使用phiz时遇到需要AI帮助的场景，如写作、翻译、问答等，懒得切换工具
 打开应用：打开Phiz AI，看到熟悉的对话界面，和底部功能标签，界面简洁直观
 选择功能：通过底部标签页切换功能（对话、写作、图片等），或直接在对话界面输入，支持文本、语音、图片三种输入方式
