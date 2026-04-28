@@ -1419,10 +1419,185 @@
         .timeline-card.flipping {
             animation: flipBookEffect 0.6s var(--ease-out);
         }
+        /* Opening Animation Styles */
+        .intro-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-white);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.8s var(--ease-out), visibility 0.8s;
+        }
+
+        .intro-animation.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .intro-animation.hidden {
+            display: none;
+        }
+
+        .intro-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-title {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 10vw, 72px);
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--color-black);
+            margin-bottom: var(--space-sm);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .intro-title.animate-in {
+            animation: titleFadeIn 1.2s var(--ease-out) forwards;
+        }
+
+        .intro-subtitle {
+            font-family: var(--font-mono);
+            font-size: clamp(10px, 1.5vw, 12px);
+            font-weight: 400;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .intro-subtitle.animate-in {
+            animation: subtitleFadeIn 1.2s var(--ease-out) 0.3s forwards;
+        }
+
+        @keyframes titleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes subtitleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro-line {
+            position: absolute;
+            background: var(--color-black);
+            opacity: 0;
+        }
+
+        .intro-line.animate-in {
+            animation: lineGrow 1.5s var(--ease-out) forwards;
+        }
+
+        .top-line {
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+        }
+
+        .bottom-line {
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+        }
+
+        .left-line {
+            left: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 0;
+        }
+
+        .right-line {
+            right: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 0;
+        }
+
+        .top-line.animate-in,
+        .bottom-line.animate-in {
+            animation: lineGrowHorizontal 1.5s var(--ease-out) forwards;
+        }
+
+        .left-line.animate-in,
+        .right-line.animate-in {
+            animation: lineGrowVertical 1.5s var(--ease-out) forwards;
+        }
+
+        @keyframes lineGrowHorizontal {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                width: 200px;
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes lineGrowVertical {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                height: 200px;
+                opacity: 0.3;
+            }
+        }
+
 
     </style>
 </head>
 <body>
+
+    <!-- Opening Animation -->
+    <div id="introAnimation" class="intro-animation">
+        <div class="intro-line left-line"></div>
+        <div class="intro-line right-line"></div>
+        <div class="intro-line top-line"></div>
+        <div class="intro-line bottom-line"></div>
+        <div class="intro-content">
+            <h1 class="intro-title">LI</h1>
+            <p class="intro-subtitle">PRODUCT MANAGER</p>
+        </div>
+    </div>
 
     <!-- ==================== List Page ==================== -->
     <div id="listPage" class="page">
@@ -1524,19 +1699,10 @@
                             <h3 class="timeline-card-title">建筑学（硕士）</h3>
                             <p class="timeline-card-org">哈尔滨工业大学（深圳）</p>
                             <p class="timeline-card-time">2021.09 - 2024.06</p>
-                            <p class="timeline-card-desc">专业排名：8/76 · 设计课排名：专业前五</p>
+                            <p class="timeline-card-desc">研究方向：XR / 人机交互 / 场景策划 / 互动设计</p>
                         </div>
                     </div>
 
-                    <div class="timeline-item">
-                        <div class="timeline-node"></div>
-                        <div class="timeline-card">
-                            <span class="timeline-card-type">教育背景</span>
-                            <h3 class="timeline-card-title">城乡规划（本科）</h3>
-                            <p class="timeline-card-org">天津城建大学</p>
-                            <p class="timeline-card-time">2013.09 - 2018.06</p>
-                        </div>
-                    </div>
 
                     <!-- Work Experience -->
                     <div class="timeline-item">
@@ -1584,13 +1750,13 @@
                         <rect x="14" y="14" width="7" height="7"/>
                         <rect x="3" y="14" width="7" height="7"/>
                     </svg>
-                    我的项目
+                    项目经历
                 </div>
                 <h1 class="h1" style="margin-bottom: var(--space-lg);">
-                    作品集
+                    产品项目
                 </h1>
                 <p class="body-large">
-                    展示你的产品思维与项目经验
+                    基于真实需求与用户研究的产品实践，展现从0到1的产品设计能力
                 </p>
             </div>
         </section>
@@ -2186,6 +2352,39 @@
 
         function init() {
             console.log('=== 开始初始化 ===');
+            
+            // Opening Animation
+            const introAnimation = document.getElementById('introAnimation');
+            const introTitle = introAnimation?.querySelector('.intro-title');
+            const introSubtitle = introAnimation?.querySelector('.intro-subtitle');
+            const lines = introAnimation?.querySelectorAll('.intro-line');
+            
+            if (introAnimation) {
+                // Delay animations for dramatic effect
+                setTimeout(() => {
+                    lines.forEach((line, index) => {
+                        setTimeout(() => {
+                            line.classList.add('animate-in');
+                        }, index * 150);
+                    });
+                    
+                    setTimeout(() => {
+                        if (introTitle) introTitle.classList.add('animate-in');
+                        if (introSubtitle) introSubtitle.classList.add('animate-in');
+                    }, lines.length * 150 + 300);
+                    
+                    // Fade out animation after 2.5 seconds
+                    setTimeout(() => {
+                        introAnimation.classList.add('fade-out');
+                        
+                        // Remove animation element after transition
+                        setTimeout(() => {
+                            introAnimation.classList.add('hidden');
+                        }, 800);
+                    }, 2500);
+                }, 100);
+            }
+            
 
             // 直接使用硬编码的项目数据
             projects = [...sampleProjects];
