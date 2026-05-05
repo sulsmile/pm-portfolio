@@ -1165,8 +1165,73 @@
         .blob-avatar svg {
             width: 100%;
             height: 100%;
-            animation: blobMorph 8s ease-in-out infinite;
             filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.15));
+        }
+
+        .blob-glass {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: blobMorph 10s ease-in-out infinite;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.7);
+            border-left: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 8px 32px rgba(255, 255, 255, 0.3),
+                inset 0 -8px 32px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .blob-glass::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(255, 255, 255, 0.6) 0%,
+                rgba(255, 255, 255, 0.1) 30%,
+                transparent 60%
+            );
+            animation: waterFlow 8s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        .blob-glass::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(ellipse at 70% 70%,
+                rgba(255, 255, 255, 0.4) 0%,
+                rgba(255, 255, 255, 0.05) 40%,
+                transparent 70%
+            );
+            animation: waterFlow 6s ease-in-out infinite reverse;
+            opacity: 0.4;
+        }
+
+        @keyframes blobMorph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 30% 60% 70% / 40% 50% 60% 50%; }
+            75% { border-radius: 40% 50% 30% 60% / 60% 40% 70% 30%; }
+        }
+
+        @keyframes waterFlow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(10%, -15%) scale(1.1); }
+            66% { transform: translate(-5%, 10%) scale(0.9); }
         }
 
         .blob-avatar-initials {
@@ -1176,15 +1241,9 @@
             transform: translate(-50%, -50%);
             font-size: 56px;
             font-weight: 600;
-            color: white;
-            z-index: 1;
-        }
-
-        @keyframes blobMorph {
-            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            50% { border-radius: 50% 30% 60% 70% / 40% 50% 60% 50%; }
-            75% { border-radius: 40% 50% 30% 60% / 60% 40% 70% 30%; }
+            color: #1a1a1a;
+            z-index: 10;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
         }
 
         .profile-name {
@@ -1614,16 +1673,7 @@
                 <aside class="profile-sidebar">
                     <!-- Blob Avatar -->
                     <div class="blob-avatar">
-                        <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="blobGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
-                                    <stop offset="50%" style="stop-color:#eab308;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <rect x="0" y="0" width="180" height="180" fill="url(#blobGradient)"/>
-                        </svg>
+                        <div class="blob-glass"></div>
                         <span class="blob-avatar-initials">JQ</span>
                     </div>
 
