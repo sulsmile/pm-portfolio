@@ -429,6 +429,12 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes arcTintShift {
+            0% { filter: hue-rotate(0deg) saturate(115%); }
+            50% { filter: hue-rotate(22deg) saturate(125%); }
+            100% { filter: hue-rotate(-16deg) saturate(118%); }
+        }
+
         /* Detail Page Styles */
         #detailPage {
             position: relative;
@@ -489,16 +495,15 @@
             width: 78%;
             height: 188%;
             background: linear-gradient(135deg,
-                rgba(255, 178, 98, 0.44) 0%,
-                rgba(244, 114, 182, 0.38) 32%,
-                rgba(192, 132, 252, 0.34) 66%,
-                rgba(129, 140, 248, 0.30) 100%
+                rgba(255, 178, 98, 0.38) 0%,
+                rgba(244, 114, 182, 0.30) 32%,
+                rgba(192, 132, 252, 0.27) 66%,
+                rgba(129, 140, 248, 0.22) 100%
             );
             background-size: 240% 240%;
-            animation: gradientShift 14s ease-in-out infinite;
-            opacity: 0.30;
+            animation: gradientShift 14s ease-in-out infinite, arcTintShift 12s ease-in-out infinite alternate;
+            opacity: 0.16;
             border-radius: 50% 0 0 50%;
-            filter: blur(0px);
             pointer-events: none;
             z-index: 0;
         }
