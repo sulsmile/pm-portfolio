@@ -254,15 +254,8 @@
         /* Project Cards Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-3xl);
-        }
-
-        @media (min-width: 768px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--space-2xl);
-            }
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-2xl);
         }
 
         .project-card {
@@ -272,7 +265,9 @@
             cursor: pointer;
             text-decoration: none;
             transition: all 0.4s var(--ease-out);
-            display: block;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             position: relative;
             overflow: hidden;
         }
@@ -295,26 +290,24 @@
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(236, 72, 153, 0.06) 100%);
         }
 
-        .project-card:hover .project-card-image {
-            transform: scale(1.05);
-        }
-
         .project-card-image {
-            width: 100%;
-            aspect-ratio: 16 / 10;
+            flex: 0 0 40%;
             background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            transition: transform 0.6s var(--ease-out);
+            padding: var(--space-sm);
         }
 
         .project-card-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+        }
+
+        .project-card:hover .project-card-image img {
+            transform: scale(1.03);
         }
 
         .project-card-image-placeholder {
@@ -326,7 +319,8 @@
         }
 
         .project-card-content {
-            padding: var(--space-xl);
+            flex: 1;
+            padding: var(--space-lg);
         }
 
         .project-card-tag {
@@ -2419,7 +2413,10 @@
             container.innerHTML = projects.map((project, index) => `
                 <a href="#" onclick="event.preventDefault(); goToDetail(${index});" class="project-card">
                     <div class="project-card-image">
-                        <span class="project-card-image-placeholder">${escapeHtml(project.name.charAt(0))}</span>
+                        ${project.coverImage
+                            ? `<img src="${project.coverImage}" alt="${escapeHtml(project.name)}">`
+                            : `<span class="project-card-image-placeholder">${escapeHtml(project.name.charAt(0))}</span>`
+                        }
                     </div>
                     <div class="project-card-content">
                         <div class="project-card-tag">${escapeHtml(project.role || '产品经理')}</div>
@@ -2764,6 +2761,7 @@
             name: "Phiz AI",
             tagline: "集成在社交软件中的智能小助理",
             role: "产品经理",
+            coverImage: "call/封面图/ai-home.png",
             description: "Phiz AI是一款集成在Phiz社交应用中的AI智能助手，为社交用户提供对话、创作、信息获取等多种AI能力。产品设计采用侧边栏历史记录、底部标签导航等交互模式，支持文本、语音、图片三种输入方式，让用户无需切换APP即可完成朋友圈文案生成、创意图片创作、音乐制作、OCR识别、多语言翻译等任务。通过打通APP内部链路，Phiz AI将AI能力无缝融入日常社交场景，帮助用户提升内容创作效率，增强社交互动体验。",
             stats: "使用率提升35.4%, 用户转化率12%, 整体功能使用率第5位",
             painPoints: `工具碎片化：用户需要在不同APP间切换才能使用不同AI功能（聊天、写作、翻译等），增加操作成本
@@ -2804,6 +2802,7 @@
             name: "Phiz Call 音视频通话",
             tagline: "社交场景的有温度通话工具",
             role: "产品经理",
+            coverImage: "call/封面图/End-to-end encryption.png",
             description: "Phiz Call是一款聚焦社交场景的音视频通话工具，通过解决巴西用户网络异常痛点、拓展社交关系链、提供情感化设计体验，为用户的情感维系、朋友聚会、兴趣协作等社交场景提供稳定、便捷、有趣的实时沟通服务。我负责音视频通话功能的产品设计，包括1v1/群组通话、屏幕共享等核心功能。产品基于真实用户研究（20+访谈），针对4大社交圈层（核心社交圈、扩展社交圈、轻社交圈、同好社交圈）和4大场景（情感维系、内容互动、信息协调、群组社交）进行深度优化。",
             stats: "4大用户圈层, 4大核心场景, 20+用户访谈, 85%内测满意度",
             painPoints: `收不到推送通知：app在后台或者关闭状态下，收不到来电推送，无法直接接听
