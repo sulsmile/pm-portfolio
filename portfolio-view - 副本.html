@@ -1348,6 +1348,56 @@
             color: var(--color-muted);
         }
 
+        /* Prototype Gallery */
+        .proto-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3xl);
+        }
+
+        .proto-gallery-group {}
+
+        .proto-gallery-group-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-white);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .proto-gallery-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            justify-content: center;
+        }
+
+        .proto-gallery-item {
+            flex: 1 1 260px;
+            max-width: 420px;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s var(--ease-out);
+        }
+
+        .proto-gallery-item:hover {
+            border-color: rgba(255, 255, 255, 0.22);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .proto-gallery-item img {
+            width: 100%;
+            display: block;
+            mix-blend-mode: screen;
+            background: transparent;
+        }
+
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -2262,6 +2312,20 @@
             </div>
         </section>
 
+        <!-- Prototype Gallery Section -->
+        <section id="protoGallerySection" class="detail-section" style="display: none;">
+            <div class="container">
+                <div class="detail-section-header">
+                    <div class="detail-section-label">Prototype</div>
+                    <h2 class="detail-section-title">原型展示</h2>
+                    <p class="detail-section-subtitle">核心页面交互流程</p>
+                </div>
+                <div id="protoGallery" class="proto-gallery">
+                    <!-- Gallery will be rendered here -->
+                </div>
+            </div>
+        </section>
+
 
         <!-- Links Section -->
         <section class="detail-section">
@@ -2649,14 +2713,40 @@
                 featuresSection.style.display = 'none';
             }
 
-            document.getElementById('detailAxureBtn').href = project.axureUrl;
-
-            const designBtn = document.getElementById('detailDesignBtn');
-            if (project.designUrl && project.designUrl.trim()) {
-                designBtn.style.display = 'flex';
-                designBtn.href = project.designUrl;
+            // Prototype Gallery
+            const gallerySection = document.getElementById('protoGallerySection');
+            if (project.gallery && project.gallery.length > 0) {
+                gallerySection.style.display = 'block';
+                document.getElementById('protoGallery').innerHTML = project.gallery.map(group => `
+                    <div class="proto-gallery-group">
+                        <div class="proto-gallery-group-title">${escapeHtml(group.title)}</div>
+                        <div class="proto-gallery-row">
+                            ${group.images.map(src => `
+                                <div class="proto-gallery-item">
+                                    <img src="${src}" alt="${escapeHtml(group.title)}" loading="lazy">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
             } else {
-                designBtn.style.display = 'none';
+                gallerySection.style.display = 'none';
+            }
+
+            // Links section: hide for projects that have inline gallery instead
+            const linksSection = document.getElementById('detailAxureBtn')?.closest('.detail-section');
+            if (project.gallery && project.gallery.length > 0) {
+                if (linksSection) linksSection.style.display = 'none';
+            } else {
+                if (linksSection) linksSection.style.display = 'block';
+                document.getElementById('detailAxureBtn').href = project.axureUrl;
+                const designBtn = document.getElementById('detailDesignBtn');
+                if (project.designUrl && project.designUrl.trim()) {
+                    designBtn.style.display = 'flex';
+                    designBtn.href = project.designUrl;
+                } else {
+                    designBtn.style.display = 'none';
+                }
             }
         }
 
@@ -2737,8 +2827,38 @@
 通知系统优化：多通道推送保障（FCM+三星+APNs），确保不错过重要来电
 性能优化：推送通道优化、低端机型编解码优化、长时间通话电池优化
 社交关系链拓展：通话中邀请群外成员、临时邀请链接、通话链接社交分享、全选成员一键呼叫，降低社交组织成本`,
-            axureUrl: "https://codesign.qq.com/s/627363398067674",
+            axureUrl: "",
             designUrl: "",
+            gallery: [
+                {
+                    title: "1V1语音通话 — 主叫",
+                    images: ["call/一对一语音通话-主叫.png"]
+                },
+                {
+                    title: "1V1语音通话 — 被叫",
+                    images: ["call/一对一语音通话-被叫.png", "call/一对一语音通话-被叫2 未接横幅.png"]
+                },
+                {
+                    title: "1V1视频通话 — 主叫",
+                    images: ["call/一对一视频通话 主叫.png"]
+                },
+                {
+                    title: "1V1视频通话 — 被叫",
+                    images: ["call/一对一视频通话- 被叫.png"]
+                },
+                {
+                    title: "多人语音通话 — 主叫",
+                    images: ["call/多人语音通话 主叫.png"]
+                },
+                {
+                    title: "多人语音通话 — 被叫",
+                    images: ["call/多人语音通话 被叫.png"]
+                },
+                {
+                    title: "多人视频通话",
+                    images: ["call/多人视频通话.png"]
+                }
+            ],
             createdAt: "2024.12 - 2025.03"
         };
 
