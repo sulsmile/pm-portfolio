@@ -1392,6 +1392,20 @@
             background: transparent;
         }
 
+        .proto-gallery-highlight {
+            padding: var(--space-md) var(--space-lg);
+            font-family: var(--font-display);
+            font-weight: 330;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .proto-gallery-highlight:empty {
+            display: none;
+        }
+
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -2718,11 +2732,16 @@
                     <div class="proto-gallery-group">
                         <div class="proto-gallery-group-title">${escapeHtml(group.title)}</div>
                         <div class="proto-gallery-row">
-                            ${group.images.map(src => `
-                                <div class="proto-gallery-item">
-                                    <img src="${src}" alt="${escapeHtml(group.title)}" loading="lazy">
-                                </div>
-                            `).join('')}
+                            ${group.images.map(img => {
+                                const src = typeof img === 'string' ? img : img.src;
+                                const highlight = typeof img === 'object' && img.highlight ? img.highlight : '';
+                                return `
+                                    <div class="proto-gallery-item">
+                                        <img src="${src}" alt="${escapeHtml(group.title)}" loading="lazy">
+                                        ${highlight ? `<div class="proto-gallery-highlight">${escapeHtml(highlight)}</div>` : ''}
+                                    </div>
+                                `;
+                            }).join('')}
                         </div>
                     </div>
                 `).join('');
@@ -2830,32 +2849,47 @@
             designUrl: "",
             gallery: [
                 {
-                    title: "1V1语音通话 — 主叫",
-                    images: ["call/一对一语音通话-主叫.png"]
+                    title: "1V1语音通话 — 被叫",
+                    images: [
+                        { src: "call/一对一语音通话-被叫.png", highlight: "快捷回复：为被叫方不便接听场景提供预设回复选项，降低社交尴尬" },
+                        { src: "call/一对一语音通话-被叫2 未接横幅.png", highlight: "未接横幅：未接来电横幅提供快捷回拨入口，缩短后续操作路径" }
+                    ]
                 },
                 {
-                    title: "1V1语音通话 — 被叫",
-                    images: ["call/一对一语音通话-被叫.png", "call/一对一语音通话-被叫2 未接横幅.png"]
+                    title: "1V1语音通话 — 主叫",
+                    images: [
+                        { src: "call/一对一语音通话-主叫.png", highlight: "" }
+                    ]
                 },
                 {
                     title: "1V1视频通话 — 主叫",
-                    images: ["call/一对一视频通话 主叫.png"]
+                    images: [
+                        { src: "call/一对一视频通话 主叫.png", highlight: "呼叫状态 Calling → Ringing 实时流转提示，让用户准确感知当前呼叫阶段；呼叫失败时提供一键回拨与语音/视频留言入口，覆盖异常闭环" }
+                    ]
                 },
                 {
                     title: "1V1视频通话 — 被叫",
-                    images: ["call/一对一视频通话- 被叫.png"]
+                    images: [
+                        { src: "call/一对一视频通话- 被叫.png", highlight: "" }
+                    ]
                 },
                 {
                     title: "多人语音通话 — 主叫",
-                    images: ["call/多人语音通话 主叫.png"]
+                    images: [
+                        { src: "call/多人语音通话 主叫.png", highlight: "发言状态实时高亮，直观识别当前说话人；通话中可快速再次邀请成员加入，降低组织成本" }
+                    ]
                 },
                 {
                     title: "多人语音通话 — 被叫",
-                    images: ["call/多人语音通话 被叫.png"]
+                    images: [
+                        { src: "call/多人语音通话 被叫.png", highlight: "优化通话房间名称取值规则与成员列表排列顺序，提升用户对通话场景与参与者的信息识别效率" }
+                    ]
                 },
                 {
                     title: "多人视频通话",
-                    images: ["call/多人视频通话.png"]
+                    images: [
+                        { src: "call/多人视频通话.png", highlight: "" }
+                    ]
                 }
             ],
             createdAt: "2024.12 - 2025.03"
