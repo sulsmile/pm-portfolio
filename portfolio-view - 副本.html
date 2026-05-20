@@ -889,111 +889,83 @@
 
         /* Journey Steps */
         .journey-steps {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             gap: var(--space-lg);
         }
 
-        @media (min-width: 768px) {
-            .journey-steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .journey-steps {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .journey-step {
-            position: relative;
-        }
-
-        .step-card {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.06) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border: 1px solid rgba(236, 72, 153, 0.12);
-            border-radius: 16px;
-            padding: var(--space-xl);
-            height: 100%;
-            position: relative;
+        .journey-dim-row {
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.3s var(--ease-out);
         }
 
-        .step-card::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -60px;
-            transform: translateY(-50%);
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 50%, transparent 70%);
-            filter: blur(20px);
-            pointer-events: none;
+        .journey-dim-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: var(--space-sm) var(--space-lg);
+            margin-bottom: 0;
         }
 
-        .step-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #ec4899 0%, #f472b6 50%, #ec4899 100%);
-            opacity: 0.5;
+        .journey-dim-title.desc-title {
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.04);
         }
 
-        .step-card:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.25);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(236, 72, 153, 0.1);
-            transform: translateY(-4px);
+        .journey-dim-title.pain-title {
+            color: #fb923c;
+            background: rgba(251, 146, 60, 0.08);
         }
 
-        .step-number {
-            display: inline-flex;
-            align-items: center;
+        .journey-dim-title.expect-title {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.08);
+        }
+
+        .journey-dim-cells {
+            display: grid;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .journey-dim-cells > div {
+            padding: var(--space-md) var(--space-lg);
+            font-family: var(--font-display);
+            font-size: 13px;
+            line-height: 1.7;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
+            min-height: 60px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .journey-dim-cells > div:last-child {
+            border-right: none;
+        }
+
+        .journey-stage-name {
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--color-white);
+            text-align: center;
+            align-items: center !important;
             justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--color-white);
-            border-radius: 50%;
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 13px;
-            margin-bottom: var(--space-md);
+            padding: var(--space-sm) var(--space-lg) !important;
         }
 
-        .step-card h3 {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: var(--space-sm);
-            color: var(--color-white);
+        @media (max-width: 768px) {
+            .journey-dim-cells {
+                grid-template-columns: 1fr !important;
+            }
+            .journey-dim-cells > div {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            .journey-dim-cells > div:last-child {
+                border-bottom: none;
+            }
         }
-
-        .step-card p {
-            font-family: var(--font-display);
-            font-weight: 330;
-            font-size: 14px;
-            color: var(--color-muted);
-            line-height: 1.6;
-        }
-
-        .step-pain {
-            margin-top: var(--space-md);
-            padding-top: var(--space-md);
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
-            font-family: var(--font-display);
-            font-size: 13px;
-            color: var(--color-muted);
-            font-style: italic;
-        }
-
         /* User Stories */
         .stories-grid {
             display: grid;
@@ -2633,9 +2605,12 @@
                         }
                     }
 
+                    const avatarUrl = project.personaAvatars && project.personaAvatars[title]
+                        ? project.personaAvatars[title] : '';
+
                     return `
                         <div class="persona-card ${types[i % types.length]}">
-                            <div class="persona-icon">${icons[i % icons.length]}</div>
+                            ${avatarUrl ? `<div style="width:56px;height:56px;border-radius:50%;overflow:hidden;margin-bottom:var(--space-md);border:2px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);"><img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;" alt="${escapeHtml(title)}"></div>` : `<div class="persona-icon">${icons[i % icons.length]}</div>`}
                             <span class="persona-tag">${labels[i % labels.length]}</span>
                             <h3>${escapeHtml(title)}</h3>
                             ${details.length > 0 ? `
@@ -2656,23 +2631,80 @@
             }
 
             // Journey
-            const journey = project.userJourney ? project.userJourney.split('\n').filter(j => j.trim()) : [];
+            const journeyRaw = project.userJourney ? project.userJourney.trim() : '';
             const journeySection = document.getElementById('journeySection');
-            if (journey.length > 0) {
+            if (journeyRaw) {
                 journeySection.style.display = 'block';
-                document.getElementById('detailJourney').innerHTML = journey.map((step, i) => {
-                    const [title, ...descParts] = step.split('：');
-                    const desc = descParts.join('：') || '';
-                    return `
-                        <div class="journey-step">
-                            <div class="step-card">
-                                <div class="step-number">${i + 1}</div>
-                                <h3>${escapeHtml(title.trim())}</h3>
-                                <p>${escapeHtml(desc.trim())}</p>
+                const stepBlocks = journeyRaw.split(/\n(?=[^\-])/).filter(s => s.trim());
+                const steps = stepBlocks.map(block => {
+                    const lines = block.split('\n').filter(l => l.trim());
+                    const [titleLine, ...extraLines] = lines;
+                    const [title, ...descParts] = titleLine.split('：');
+                    const desc = descParts.join('：').trim();
+                    let pain = '';
+                    let expect = '';
+                    extraLines.forEach(line => {
+                        const trimmed = line.trim().replace(/^- /, '');
+                        if (line.trim().startsWith('- 痛点')) pain = trimmed.replace(/^痛点[：:]?\s*/, '');
+                        if (line.trim().startsWith('- 期望')) expect = trimmed.replace(/^期望[：:]?\s*/, '');
+                    });
+                    return { title: title.trim(), desc, pain, expect };
+                });
+
+                const colStyle = `grid-template-columns: repeat(${steps.length}, 1fr);`;
+                // Progressive base colors for each stage (RGBA with low alpha for backgrounds)
+                const stageBg = [
+                    'rgba(255,255,255,0.03)',
+                    'rgba(255,255,255,0.05)',
+                    'rgba(255,255,255,0.07)',
+                    'rgba(255,255,255,0.09)',
+                    'rgba(255,255,255,0.11)'
+                ];
+                const painBg = [
+                    'rgba(251,146,60,0.06)',
+                    'rgba(251,146,60,0.09)',
+                    'rgba(251,146,60,0.12)',
+                    'rgba(251,146,60,0.15)',
+                    'rgba(251,146,60,0.18)'
+                ];
+                const expectBg = [
+                    'rgba(74,222,128,0.06)',
+                    'rgba(74,222,128,0.09)',
+                    'rgba(74,222,128,0.12)',
+                    'rgba(74,222,128,0.15)',
+                    'rgba(74,222,128,0.18)'
+                ];
+
+                document.getElementById('detailJourney').innerHTML = `
+                    <div class="journey-steps">
+                        <div class="journey-dim-row" style="border:1px solid rgba(255,255,255,0.10);border-radius:12px;overflow:hidden;">
+                            <div class="journey-dim-cells" style="${colStyle};border-top:none;">
+                                ${steps.map((s, i) => `<div class="journey-stage-name" style="background:${stageBg[i]};">${i + 1}. ${escapeHtml(s.title)}</div>`).join('')}
                             </div>
                         </div>
-                    `;
-                }).join('');
+
+                        <div class="journey-dim-row" style="border:1px solid rgba(255,255,255,0.10);border-radius:12px;overflow:hidden;">
+                            <div class="journey-dim-title desc-title">场景描述</div>
+                            <div class="journey-dim-cells" style="${colStyle}">
+                                ${steps.map((s, i) => `<div style="background:${stageBg[i]};color:rgba(255,255,255,0.75);">${escapeHtml(s.desc)}</div>`).join('')}
+                            </div>
+                        </div>
+
+                        <div class="journey-dim-row" style="border:1px solid rgba(251,146,60,0.15);border-radius:12px;overflow:hidden;">
+                            <div class="journey-dim-title pain-title">痛点</div>
+                            <div class="journey-dim-cells" style="${colStyle}">
+                                ${steps.map((s, i) => `<div style="background:${painBg[i]};color:#fb923c;">${escapeHtml(s.pain)}</div>`).join('')}
+                            </div>
+                        </div>
+
+                        <div class="journey-dim-row" style="border:1px solid rgba(74,222,128,0.15);border-radius:12px;overflow:hidden;">
+                            <div class="journey-dim-title expect-title">期望</div>
+                            <div class="journey-dim-cells" style="${colStyle}">
+                                ${steps.map((s, i) => `<div style="background:${expectBg[i]};color:#4ade80;">${escapeHtml(s.expect)}</div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
             } else {
                 journeySection.style.display = 'none';
             }
@@ -2791,14 +2823,24 @@
             personas: `内容创作活跃型（主要）
 功能按需使用型（次要）
 信息轻度获取型（扩展）`,
+            personaAvatars: {
+                '内容创作活跃型': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Creator&backgroundColor=transparent',
+                '功能按需使用型': 'https://api.dicebear.com/7.x/avataaars/svg?seed=OnDemand&backgroundColor=transparent',
+                '信息轻度获取型': 'https://api.dicebear.com/7.x/avataaars/svg?seed=LightUser&backgroundColor=transparent'
+            },
             userJourney: `触发需求：用户在使用phiz时遇到需要AI帮助的场景，如写作、翻译、问答等，懒得切换工具
-打开应用：打开Phiz AI，看到熟悉的对话界面，和底部功能标签，界面简洁直观
-选择功能：通过底部标签页切换功能（对话、写作、图片等），或直接在对话界面输入，支持文本、语音、图片三种输入方式
-获得结果：AI快速返回结果，用户可以复制保存、继续对话深入，或在侧边栏查看历史记录`,
-            userStories: `作为内容创作活跃型用户，我想要快速生成吸引人的朋友圈文案和配图，以便在日常生活中持续分享生活点滴，获得更多点赞和评论
-作为功能按需使用型用户，我想要OCR识别图片中的文字，以便快速提取朋友分享的图片中的有用信息，无需手动输入
-作为信息轻度获取型用户，我想要快速查询天气信息，以便和朋友确认出行计划时不用切换天气APP
-作为信息轻度获取型用户，我想要查看每日新鲜事，以便在和朋友聊天时有话题可聊，融入社交互动`,
+- 痛点：难以找到AI入口，AI在各场景的功能渗透不高。
+- 期望：AI功能渗透到APP各种使用场景中，不用切换至专门的AI功能下。
+打开应用：打开Phiz AI，看到简单的对话界面，不知道能做什么。
+- 痛点：界面吸引力不高，缺乏引导式交互。
+- 期望：首页有清晰的引导，对AI功能具体能做什么有一定的了解。
+开始输入：直接在对话界面手动输入，不知道如何向AI精准的表达意图。
+- 痛点：缺乏功能使用提示，输入方式单一。
+- 期望：清晰的操作引导，支持多模态输入。
+获得结果：AI快速返回结果，用户可以复制保存、继续对话深入，或在侧边栏查看历史记录。
+- 痛点：对话历史难以查找，无归档分类，容易丢失上下文。
+- 期望：历史记录功能，按对话进行分类。`,
+            userStories: ``,
             features: `基本聊天功能：基于大语言模型的多轮对话能力，支持上下文理解，准确响应率高
 历史记录侧边栏：管理所有对话历史，快速搜索、回顾和继续之前的对话
 底部标签导航：写作、创作图片、生成音乐、新闻等功能的便捷切换
@@ -2851,7 +2893,7 @@
                 {
                     title: "1V1语音通话 — 被叫",
                     images: [
-                        { src: "call/一对一语音通话-被叫.png", highlight: "快捷回复：为被叫方不便接听场景提供预设回复选项，降低社交尴尬" },
+                        { src: "call/一对一语音通话-被叫.png", highlight: "快捷回复：为被叫方不便接听场景提供预设回复选项，降低沟通成本" },
                         { src: "call/一对一语音通话-被叫2 未接横幅.png", highlight: "未接横幅：未接来电横幅提供快捷回拨入口，缩短后续操作路径" }
                     ]
                 },
@@ -2882,7 +2924,7 @@
                 {
                     title: "多人语音通话 — 被叫",
                     images: [
-                        { src: "call/多人语音通话 被叫.png", highlight: "优化通话房间名称取值规则与成员列表排列顺序，提升用户对通话场景与参与者的信息识别效率" }
+                        { src: "call/多人语音通话 被叫.png", highlight: "优化通话房间名称取值规则与成员列表排列顺序，提升用户对通话参与者的信息识别效率" }
                     ]
                 },
                 {
