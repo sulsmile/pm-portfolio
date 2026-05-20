@@ -21,11 +21,11 @@
             --color-border: rgba(255, 255, 255, 0.1);
 
             --gradient-hero: linear-gradient(135deg,
-                #ec4899 0%,
-                #f472b6 25%,
-                #db2777 50%,
-                #ec4899 75%,
-                #be185d 100%
+                #22c55e 0%,
+                #4ade80 25%,
+                #16a34a 50%,
+                #22c55e 75%,
+                #15803d 100%
             );
 
             --font-display: 'Inter', -apple-system, system-ui, sans-serif;
@@ -259,7 +259,7 @@
         }
 
         .project-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(236, 72, 153, 0.03) 100%);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(34, 197, 94, 0.03) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             cursor: pointer;
@@ -284,10 +284,10 @@
         }
 
         .project-card:hover {
-            border-color: rgba(236, 72, 153, 0.3);
+            border-color: rgba(34, 197, 94, 0.3);
             transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(236, 72, 153, 0.08);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(236, 72, 153, 0.06) 100%);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(34, 197, 94, 0.08);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(34, 197, 94, 0.06) 100%);
         }
 
         .project-card-image {
@@ -326,15 +326,15 @@
         .project-card-tag {
             display: inline-block;
             padding: 4px 10px;
-            background: rgba(236, 72, 153, 0.1);
-            border: 1px solid rgba(236, 72, 153, 0.2);
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
             border-radius: 20px;
             font-family: var(--font-mono);
             font-size: 10px;
             font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            color: #f472b6;
+            color: #4ade80;
             margin-bottom: var(--space-sm);
         }
 
@@ -404,10 +404,13 @@
             right: -20%;
             width: 80%;
             height: 200%;
-            background: var(--gradient-hero);
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
-            opacity: 0.05;
+            background: radial-gradient(circle at 40% 50%,
+                rgba(251, 191, 36, 0.18) 0%,
+                rgba(251, 146, 60, 0.12) 30%,
+                rgba(251, 146, 60, 0.06) 55%,
+                transparent 80%
+            );
+            opacity: 0.7;
             border-radius: 50% 0 0 50%;
             pointer-events: none;
         }
@@ -443,10 +446,10 @@
             max-height: 700px;
             border-radius: 50%;
             background: radial-gradient(circle at 30% 50%,
-                rgba(236, 72, 153, 0.07) 0%,
-                rgba(219, 39, 119, 0.04) 25%,
-                rgba(190, 24, 93, 0.02) 50%,
-                rgba(131, 24, 67, 0.01) 70%,
+                rgba(251, 191, 36, 0.09) 0%,
+                rgba(251, 146, 60, 0.05) 25%,
+                rgba(251, 146, 60, 0.03) 50%,
+                rgba(251, 146, 60, 0.01) 70%,
                 transparent 85%
             );
             filter: blur(30px);
@@ -489,14 +492,14 @@
             width: 78%;
             height: 188%;
             background: linear-gradient(135deg,
-                rgba(255, 178, 98, 0.38) 0%,
-                rgba(244, 114, 182, 0.30) 32%,
-                rgba(192, 132, 252, 0.27) 66%,
-                rgba(129, 140, 248, 0.22) 100%
+                rgba(251, 191, 36, 0.40) 0%,
+                rgba(251, 163, 56, 0.34) 35%,
+                rgba(251, 146, 60, 0.28) 70%,
+                rgba(249, 115, 22, 0.22) 100%
             );
             background-size: 240% 240%;
-            animation: gradientShift 14s ease-in-out infinite, arcTintShift 12s ease-in-out infinite alternate;
-            opacity: 0.16;
+            animation: gradientShift 14s ease-in-out infinite;
+            opacity: 0.14;
             border-radius: 50% 0 0 50%;
             pointer-events: none;
             z-index: 0;
@@ -651,8 +654,8 @@
         }
 
         .pain-point-card {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.08) 0%, rgba(236, 72, 153, 0.02) 30%, rgba(255, 255, 255, 0.02) 60%);
-            border: 1px solid rgba(236, 72, 153, 0.12);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.02) 30%, rgba(255, 255, 255, 0.02) 60%);
+            border: 1px solid rgba(34, 197, 94, 0.12);
             border-radius: 16px;
             padding: var(--space-xl);
             padding-left: calc(var(--space-xl) + 24px);
@@ -670,7 +673,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0.05) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 50%, transparent 70%);
             filter: blur(20px);
             pointer-events: none;
         }
@@ -682,15 +685,15 @@
             left: 0;
             width: 4px;
             bottom: 0;
-            background: linear-gradient(180deg, #ec4899 0%, #db2777 50%, #be185d 100%);
+            background: linear-gradient(180deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
             opacity: 0.7;
             border-radius: 2px;
         }
 
         .pain-point-card:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 30%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.25);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(236, 72, 153, 0.1);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 30%, rgba(255, 255, 255, 0.03) 60%);
+            border-color: rgba(34, 197, 94, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(34, 197, 94, 0.1);
             transform: translateY(-4px);
         }
 
@@ -724,8 +727,8 @@
         }
 
         .persona-card {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.06) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border: 1px solid rgba(236, 72, 153, 0.12);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.06) 0%, rgba(34, 197, 94, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
+            border: 1px solid rgba(34, 197, 94, 0.12);
             border-radius: 16px;
             padding: var(--space-xl);
             position: relative;
@@ -742,7 +745,7 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 50%, transparent 70%);
             filter: blur(20px);
             pointer-events: none;
         }
@@ -754,48 +757,48 @@
             left: 0;
             width: 4px;
             bottom: 0;
-            background: linear-gradient(180deg, #ec4899 0%, #f472b6 100%);
+            background: linear-gradient(180deg, #22c55e 0%, #4ade80 100%);
             opacity: 0.7;
             border-radius: 2px;
         }
 
         .persona-card.primary {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.06) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border-color: rgba(236, 72, 153, 0.12);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.06) 0%, rgba(34, 197, 94, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
+            border-color: rgba(34, 197, 94, 0.12);
         }
 
         .persona-card.primary::before {
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 50%, transparent 70%);
         }
 
         .persona-card.primary::after {
-            background: linear-gradient(180deg, #ec4899 0%, #f472b6 100%);
+            background: linear-gradient(180deg, #22c55e 0%, #4ade80 100%);
         }
 
         .persona-card.secondary {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.06) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border-color: rgba(236, 72, 153, 0.12);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.06) 0%, rgba(34, 197, 94, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
+            border-color: rgba(34, 197, 94, 0.12);
         }
 
         .persona-card.secondary::before {
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 50%, transparent 70%);
         }
 
         .persona-card.secondary::after {
-            background: linear-gradient(180deg, #ec4899 0%, #f472b6 100%);
+            background: linear-gradient(180deg, #22c55e 0%, #4ade80 100%);
         }
 
         .persona-card.extended {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.06) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border-color: rgba(236, 72, 153, 0.12);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.06) 0%, rgba(34, 197, 94, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
+            border-color: rgba(34, 197, 94, 0.12);
         }
 
         .persona-card.extended::before {
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 50%, transparent 70%);
         }
 
         .persona-card.extended::after {
-            background: linear-gradient(180deg, #ec4899 0%, #f472b6 100%);
+            background: linear-gradient(180deg, #22c55e 0%, #4ade80 100%);
         }
 
         .persona-card:hover {
@@ -804,21 +807,21 @@
         }
 
         .persona-card.primary:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.25);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(236, 72, 153, 0.1);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
+            border-color: rgba(34, 197, 94, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(34, 197, 94, 0.1);
         }
 
         .persona-card.secondary:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.25);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(236, 72, 153, 0.1);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
+            border-color: rgba(34, 197, 94, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(34, 197, 94, 0.1);
         }
 
         .persona-card.extended:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.25);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(236, 72, 153, 0.1);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
+            border-color: rgba(34, 197, 94, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(34, 197, 94, 0.1);
         }
 
         .persona-tag {
@@ -834,18 +837,18 @@
         }
 
         .persona-card.primary .persona-tag {
-            background: rgba(236, 72, 153, 0.12);
-            color: #ec4899;
+            background: rgba(34, 197, 94, 0.12);
+            color: #22c55e;
         }
 
         .persona-card.secondary .persona-tag {
-            background: rgba(236, 72, 153, 0.12);
-            color: #ec4899;
+            background: rgba(34, 197, 94, 0.12);
+            color: #22c55e;
         }
 
         .persona-card.extended .persona-tag {
-            background: rgba(236, 72, 153, 0.12);
-            color: #ec4899;
+            background: rgba(34, 197, 94, 0.12);
+            color: #22c55e;
         }
 
         .persona-card h3 {
@@ -883,7 +886,7 @@
             content: '—';
             position: absolute;
             left: 0;
-            color: #ec4899;
+            color: #22c55e;
             font-weight: 700;
         }
 
@@ -980,8 +983,8 @@
         }
 
         .story-card {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.06) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border: 1px solid rgba(236, 72, 153, 0.12);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.06) 0%, rgba(34, 197, 94, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
+            border: 1px solid rgba(34, 197, 94, 0.12);
             border-radius: 16px;
             padding: var(--space-xl);
             color: var(--color-white);
@@ -999,7 +1002,7 @@
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 50%, transparent 70%);
             filter: blur(20px);
             pointer-events: none;
         }
@@ -1011,15 +1014,15 @@
             left: 0;
             width: 3px;
             bottom: 0;
-            background: linear-gradient(180deg, #ec4899 0%, #f472b6 100%);
+            background: linear-gradient(180deg, #22c55e 0%, #4ade80 100%);
             opacity: 0.6;
             border-radius: 2px;
         }
 
         .story-card:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.25);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(236, 72, 153, 0.1);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
+            border-color: rgba(34, 197, 94, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(34, 197, 94, 0.1);
             transform: translateY(-4px);
         }
 
@@ -1051,102 +1054,182 @@
         }
 
         /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+        /* Feature Mind Map */
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-xl) 0;
+        }
+
+        .mindmap-center-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2xl);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .mindmap-root {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08));
+            border: 1.5px solid rgba(34, 197, 94, 0.35);
+            border-radius: 12px;
+            padding: 12px 28px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-white);
+            flex-shrink: 0;
+        }
+
+        .mindmap-left-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
             gap: var(--space-lg);
         }
 
-        @media (min-width: 768px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .mindmap-right-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .feature-card {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.06) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border: 1px solid rgba(236, 72, 153, 0.12);
-            border-radius: 16px;
-            padding: var(--space-xl);
-            transition: all 0.3s var(--ease-out);
-            position: relative;
-            overflow: hidden;
+        .mindmap-parent-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-xl);
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -100px;
-            transform: translateY(-50%);
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0.04) 50%, transparent 70%);
-            filter: blur(25px);
-            pointer-events: none;
+        .mindmap-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #ec4899 0%, #f472b6 50%, #ec4899 100%);
-            opacity: 0.5;
+        .mindmap-branch.left-branch {
+            align-items: flex-end;
         }
 
-        .feature-card:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.1) 0%, rgba(236, 72, 153, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.25);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(236, 72, 153, 0.1);
-            transform: translateY(-4px);
+        .mindmap-branch.right-branch {
+            align-items: flex-start;
         }
 
-        .feature-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-family: var(--font-mono);
-            font-size: 10px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: var(--space-md);
-            border: 1px solid rgba(236, 72, 153, 0.3);
-            background: rgba(236, 72, 153, 0.08);
-            color: #f472b6;
+        .mindmap-branch-stem {
+            width: 2px;
+            height: 14px;
+            background: rgba(34, 197, 94, 0.20);
         }
 
-        .feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: var(--space-md);
-            opacity: 0.6;
+        .mindmap-node {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(34, 197, 94, 0.18);
+            border-radius: 10px;
+            padding: 10px 16px;
+            text-align: center;
+            max-width: 220px;
+            width: 100%;
         }
 
-        .feature-card h3 {
+        .mindmap-node-title {
             font-family: var(--font-display);
             font-weight: 700;
-            font-size: 18px;
-            margin-bottom: var(--space-sm);
+            font-size: 13px;
+            color: var(--color-white);
+            margin-bottom: 4px;
         }
 
-        .feature-card p {
+        .mindmap-node-desc {
             font-family: var(--font-display);
             font-weight: 330;
-            font-size: 14px;
+            font-size: 11px;
             color: var(--color-muted);
-            line-height: 1.6;
-            margin-bottom: var(--space-md);
+            line-height: 1.5;
         }
 
-        .feature-metric {
-            font-family: var(--font-mono);
+        .mindmap-sub-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .mindmap-sub-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-start;
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .mindmap-sub-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(251, 146, 60, 0.15);
+        }
+
+        .mindmap-sub-row.above {
+            margin-bottom: 4px;
+        }
+
+        .mindmap-sub-row.below {
+            margin-top: 4px;
+        }
+
+        .mindmap-sub-item {
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .mindmap-sub-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 10px;
+            height: 2px;
+            background: rgba(251, 146, 60, 0.15);
+        }
+
+        .mindmap-child-stem {
+            width: 2px;
+            height: 10px;
+            background: rgba(251, 146, 60, 0.18);
+        }
+
+        .mindmap-child-node {
+            background: rgba(251, 146, 60, 0.06);
+            border: 1px solid rgba(251, 146, 60, 0.15);
+            border-radius: 8px;
+            padding: 8px 14px;
+            max-width: 200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .mindmap-child-node .mindmap-node-title {
             font-size: 12px;
-            color: #ec4899;
-            font-weight: 400;
+            color: #fb923c;
+        }
+
+        .mindmap-child-node .mindmap-node-desc {
+            font-size: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .mindmap-center-row {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+            .mindmap-left-stack {
+                align-items: center;
+            }
         }
 
         /* Architecture */
@@ -1194,27 +1277,27 @@
         }
 
         .arch-component.app {
-            background: rgba(236, 72, 153, 0.1);
-            border-color: #ec4899;
-            color: #ec4899;
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+            color: #22c55e;
         }
 
         .arch-component.processing {
-            background: rgba(236, 72, 153, 0.1);
-            border-color: #ec4899;
-            color: #ec4899;
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+            color: #22c55e;
         }
 
         .arch-component.storage {
-            background: rgba(236, 72, 153, 0.1);
-            border-color: #ec4899;
-            color: #ec4899;
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+            color: #22c55e;
         }
 
         .arch-component.data {
-            background: rgba(236, 72, 153, 0.1);
-            border-color: #ec4899;
-            color: #ec4899;
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+            color: #22c55e;
         }
 
         .arch-arrow {
@@ -1254,8 +1337,8 @@
             align-items: center;
             gap: var(--space-md);
             padding: var(--space-lg);
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.05) 0%, rgba(236, 72, 153, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
-            border: 1px solid rgba(236, 72, 153, 0.1);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0.02) 25%, rgba(255, 255, 255, 0.02) 60%);
+            border: 1px solid rgba(34, 197, 94, 0.1);
             border-radius: 12px;
             text-decoration: none;
             transition: all 0.2s var(--ease-out);
@@ -1272,16 +1355,16 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
             filter: blur(15px);
             pointer-events: none;
         }
 
         .link-card-item:hover {
-            background: linear-gradient(100deg, rgba(236, 72, 153, 0.08) 0%, rgba(236, 72, 153, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
-            border-color: rgba(236, 72, 153, 0.2);
+            background: linear-gradient(100deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.03) 25%, rgba(255, 255, 255, 0.03) 60%);
+            border-color: rgba(34, 197, 94, 0.2);
             transform: translateX(4px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(236, 72, 153, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(34, 197, 94, 0.08);
         }
 
         .link-card-icon {
@@ -1666,22 +1749,22 @@
 
         .skill-tag {
             padding: var(--space-sm) var(--space-md);
-            background: rgba(236, 72, 153, 0.08);
-            border: 1px solid rgba(236, 72, 153, 0.2);
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.2);
             border-radius: var(--radius-pill);
             font-size: 13px;
             font-weight: 500;
-            color: #f472b6;
+            color: #4ade80;
             cursor: default;
             transition: all 0.3s var(--ease-out);
         }
 
         .skill-tag:hover {
-            background: rgba(236, 72, 153, 0.15);
+            background: rgba(34, 197, 94, 0.15);
             color: #fbcfe8;
-            border-color: rgba(236, 72, 153, 0.35);
+            border-color: rgba(34, 197, 94, 0.35);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 15px rgba(236, 72, 153, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 15px rgba(34, 197, 94, 0.15);
         }
 
         .contact-info {
@@ -2734,24 +2817,73 @@
                 storiesSection.style.display = 'none';
             }
 
-            // Features
-            const features = project.features ? project.features.split('\n').filter(f => f.trim()) : [];
+            // Features (Mind Map for AI project, grid for others)
             const featuresSection = document.getElementById('featuresSection');
-            if (features.length > 0) {
+            if (project.featureTree) {
                 featuresSection.style.display = 'block';
-                const badges = ['core', 'ai', 'ux'];
-                const icons = ['💬', '✨', '🎯'];
-                document.getElementById('detailFeatures').innerHTML = features.map((feature, i) => {
-                    const [name, ...descParts] = feature.split('：');
-                    const desc = descParts.join('：') || '';
+                const tree = project.featureTree;
+                const renderNode = (node, isChild) => {
+                    const nodeCls = isChild ? 'mindmap-child-node' : 'mindmap-node';
+                    let html = `<div class="${nodeCls}">`;
+                    html += `<div class="mindmap-node-title">${escapeHtml(node.name)}</div>`;
+                    if (node.desc) html += `<div class="mindmap-node-desc">${escapeHtml(node.desc)}</div>`;
+                    html += `</div>`;
+                    return html;
+                };
+
+                const renderChildrenAround = (node) => {
+                    if (!node.children || node.children.length === 0) return renderNode(node, false);
+                    const kids = node.children;
+                    const half = Math.ceil(kids.length / 2);
+                    const topKids = kids.slice(0, half);
+                    const bottomKids = kids.slice(half);
                     return `
-                        <div class="feature-card">
-                            <div class="feature-icon">${icons[i % icons.length]}</div>
-                            <h3>${escapeHtml(name.trim())}</h3>
-                            <p>${escapeHtml(desc.trim())}</p>
+                        <div class="mindmap-parent-row">
+                            ${renderNode(node, false)}
+                            <div class="mindmap-sub-wrap">
+                                <div class="mindmap-sub-row above">
+                                    ${topKids.map(c => `<div class="mindmap-sub-item">${renderNode(c, true)}</div>`).join('')}
+                                </div>
+                                <div class="mindmap-sub-row below">
+                                    ${bottomKids.map(c => `<div class="mindmap-sub-item">${renderNode(c, true)}</div>`).join('')}
+                                </div>
+                            </div>
                         </div>
                     `;
-                }).join('');
+                };
+
+                // Left side: leaf nodes stacked vertically
+                const leftBranches = tree.children.filter(b => !b.children || b.children.length === 0);
+                // Right side: node with children
+                const rightBranch = tree.children.find(b => b.children && b.children.length > 0);
+
+                document.getElementById('detailFeatures').innerHTML = `
+                    <div class="mindmap">
+                        <div class="mindmap-center-row">
+                            <div class="mindmap-left-stack">
+                                ${leftBranches.map(branch => `
+                                    <div class="mindmap-branch left-branch">
+                                        <div class="mindmap-branch-stem"></div>
+                                        ${renderNode(branch, false)}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="mindmap-root">${escapeHtml(tree.name)}</div>
+                            <div class="mindmap-right-col">
+                                ${rightBranch ? renderChildrenAround(rightBranch) : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (project.features) {
+                featuresSection.style.display = 'block';
+                const features = project.features.split('\n').filter(f => f.trim());
+                const icons = ['💬', '✨', '🎯'];
+                document.getElementById('detailFeatures').innerHTML = `<div class="features-grid">${features.map((feature, i) => {
+                    const [name, ...descParts] = feature.split('：');
+                    const desc = descParts.join('：') || '';
+                    return `<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:var(--space-xl);"><div style="font-size:1.5rem;margin-bottom:var(--space-md);opacity:0.6;">${icons[i % icons.length]}</div><h3 style="font-family:var(--font-display);font-weight:700;font-size:18px;margin-bottom:var(--space-sm);color:var(--color-white);">${escapeHtml(name.trim())}</h3><p style="font-family:var(--font-display);font-weight:330;font-size:14px;color:var(--color-muted);line-height:1.6;">${escapeHtml(desc.trim())}</p></div>`;
+                }).join('')}</div>`;
             } else {
                 featuresSection.style.display = 'none';
             }
@@ -2841,18 +2973,27 @@
 - 痛点：对话历史难以查找，无归档分类，容易丢失上下文。
 - 期望：历史记录功能，按对话进行分类。`,
             userStories: ``,
-            features: `基本聊天功能：基于大语言模型的多轮对话能力，支持上下文理解，准确响应率高
-历史记录侧边栏：管理所有对话历史，快速搜索、回顾和继续之前的对话
-底部标签导航：写作、创作图片、生成音乐、新闻等功能的便捷切换
-写作：文案生成、邮件撰写、报告输出，多种写作模板，一键生成高质量内容，提升写作效率
-图片生成：文本描述生成创意图片，支持多种风格和尺寸，快速生成高清图片
-图片转文字：强大的OCR能力，精准识别图片内容，并回答相关问题
-创作音乐：接入API,生成多种风格的音乐
-语音聊天：实时语音对话，流式识别和反馈，自然的语音交互体验
-多语言翻译：支持葡语，西班牙语等多种语言的互译，准确传达语义和文化内涵
-查询天气：实时天气信息查询，支持南美热门城市，提供详细的天气预报和建议
-每日新鲜事：抓取全球与巴西热点新闻，每日定时新闻推送。联动channel功能，打通APP链路
-新闻后台：内容管理和发布系统，支持内容审核和上下架管理，保障内容质量`,
+            featureTree: {
+                name: "核心功能",
+                children: [
+                    { name: "基本聊天功能", desc: "基于大语言模型的多轮对话能力，支持上下文理解，准确响应率高" },
+                    {
+                        name: "底部标签导航",
+                        desc: "写作、创作图片、生成音乐、新闻等功能的便捷切换",
+                        children: [
+                            { name: "写作", desc: "文案生成、邮件撰写、报告输出，多种写作模板，提升写作效率" },
+                            { name: "图片生成", desc: "文本描述生成创意图片，支持多种风格和尺寸" },
+                            { name: "图片转文字", desc: "强大的OCR能力，精准识别图片内容并回答相关问题" },
+                            { name: "创作音乐", desc: "接入API，生成多种风格的音乐" },
+                            { name: "语音聊天", desc: "实时语音对话，流式识别和反馈，自然的语音交互体验" },
+                            { name: "多语言翻译", desc: "支持葡语、西班牙语等多种语言的互译" },
+                            { name: "查询天气", desc: "实时天气信息查询，支持南美热门城市" }
+                        ]
+                    },
+                    { name: "历史记录侧边栏", desc: "管理所有对话历史，快速搜索、回顾和继续之前的对话" },
+                    { name: "每日新鲜事", desc: "抓取全球与巴西热点新闻，每日定时推送，联动channel功能" }
+                ]
+            },
             axureUrl: "https://39ilcq.axshare.com",
             designUrl: "",
             createdAt: "2025.06 - 2025.07"
