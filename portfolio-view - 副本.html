@@ -401,16 +401,16 @@
             content: '';
             position: absolute;
             top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 200%;
+            right: -28%;
+            width: 65%;
+            height: 160%;
             background: radial-gradient(circle at 40% 50%,
                 rgba(251, 191, 36, 0.18) 0%,
                 rgba(251, 146, 60, 0.12) 30%,
                 rgba(251, 146, 60, 0.06) 55%,
                 transparent 80%
             );
-            opacity: 0.7;
+            opacity: 0.5;
             border-radius: 50% 0 0 50%;
             pointer-events: none;
         }
@@ -2280,8 +2280,6 @@
     <div id="detailPage" class="page">
         <!-- Background Orbs -->
         <div class="bg-orb bg-orb-1"></div>
-        <div class="bg-orb bg-orb-2"></div>
-        <div class="bg-orb bg-orb-3"></div>
 
         <nav class="nav">
             <div class="container nav-content">
@@ -2306,7 +2304,7 @@
         </section>
 
         <!-- Problem Section -->
-        <section class="detail-section">
+        <section id="painPointsSection" class="detail-section">
             <div class="container">
                 <div class="detail-section-header">
                     <div class="detail-section-label">The Problem</div>
@@ -2366,7 +2364,7 @@
             <div class="container">
                 <div class="detail-section-header">
                     <div class="detail-section-label">Features & Demo</div>
-                    <h2 class="detail-section-title">核心功能</h2>
+                    <h2 id="featuresSectionTitle" class="detail-section-title">核心功能</h2>
                     <p class="detail-section-subtitle">精心设计的功能模块</p>
                 </div>
                 <div id="detailFeatures" class="features-grid">
@@ -2592,22 +2590,8 @@
                 document.getElementById('detailStats').innerHTML = '';
             }
 
-            // Pain Points
-            const painPoints = project.painPoints ? project.painPoints.split('\n').filter(p => p.trim()) : [];
-            if (painPoints.length > 0) {
-                document.getElementById('detailPainPoints').innerHTML = painPoints.map((point, i) => {
-                    const icons = ['🔧', '📚', '🔗', '📝', '🎤'];
-                    return `
-                        <div class="pain-point-card">
-                            <div class="pain-point-icon">${icons[i % icons.length]}</div>
-                            <h3>${escapeHtml(point.split(':')[0] || point)}</h3>
-                            <p>${escapeHtml(point.split(':').slice(1).join(':') || '')}</p>
-                        </div>
-                    `;
-                }).join('');
-            } else {
-                document.getElementById('detailPainPoints').innerHTML = '<p style="text-align:center;color:var(--color-muted);">暂无痛点描述</p>';
-            }
+            // Pain Points - hidden
+            document.getElementById('painPointsSection').style.display = 'none';
 
             // Personas
             const personas = project.personas ? project.personas.split('\n').filter(p => p.trim()) : [];
@@ -2819,6 +2803,7 @@
 
             // Features (Mind Map for AI project, grid for others)
             const featuresSection = document.getElementById('featuresSection');
+            document.getElementById('featuresSectionTitle').textContent = project.featuresTitle || '核心功能';
             if (project.featureTree) {
                 featuresSection.style.display = 'block';
                 const tree = project.featureTree;
@@ -2852,10 +2837,11 @@
                     `;
                 };
 
-                // Left side: leaf nodes stacked vertically
-                const leftBranches = tree.children.filter(b => !b.children || b.children.length === 0);
-                // Right side: node with children
+                // Left side: leaf nodes not marked side='right'
+                const leftBranches = tree.children.filter(b => b.side !== 'right' && (!b.children || b.children.length === 0));
+                // Right side: node with children (AI project) or nodes with side='right' (Call project)
                 const rightBranch = tree.children.find(b => b.children && b.children.length > 0);
+                const rightSideNodes = tree.children.filter(b => b.side === 'right');
 
                 document.getElementById('detailFeatures').innerHTML = `
                     <div class="mindmap">
@@ -2871,6 +2857,12 @@
                             <div class="mindmap-root">${escapeHtml(tree.name)}</div>
                             <div class="mindmap-right-col">
                                 ${rightBranch ? renderChildrenAround(rightBranch) : ''}
+                                ${rightSideNodes.length > 0 ? rightSideNodes.map(node => `
+                                    <div class="mindmap-branch right-branch">
+                                        <div class="mindmap-branch-stem"></div>
+                                        ${renderNode(node, false)}
+                                    </div>
+                                `).join('') : ''}
                             </div>
                         </div>
                     </div>
@@ -2955,11 +2947,6 @@
             personas: `内容创作活跃型（主要）
 功能按需使用型（次要）
 信息轻度获取型（扩展）`,
-            personaAvatars: {
-                '内容创作活跃型': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Creator&backgroundColor=transparent',
-                '功能按需使用型': 'https://api.dicebear.com/7.x/avataaars/svg?seed=OnDemand&backgroundColor=transparent',
-                '信息轻度获取型': 'https://api.dicebear.com/7.x/avataaars/svg?seed=LightUser&backgroundColor=transparent'
-            },
             userJourney: `触发需求：用户在使用phiz时遇到需要AI帮助的场景，如写作、翻译、问答等，懒得切换工具
 - 痛点：难以找到AI入口，AI在各场景的功能渗透不高。
 - 期望：AI功能渗透到APP各种使用场景中，不用切换至专门的AI功能下。
@@ -3006,7 +2993,7 @@
             role: "产品经理",
             coverImage: "call/封面图/End-to-end encryption.png",
             description: "Phiz Call是一款聚焦社交场景的音视频通话工具，通过解决巴西用户网络异常痛点、拓展社交关系链、提供情感化设计体验，为用户的情感维系、朋友聚会、兴趣协作等社交场景提供稳定、便捷、有趣的实时沟通服务。我负责音视频通话功能的产品设计，包括1v1/群组通话、屏幕共享等核心功能。产品基于真实用户研究（20+访谈），针对4大社交圈层（核心社交圈、扩展社交圈、轻社交圈、同好社交圈）和4大场景（情感维系、内容互动、信息协调、群组社交）进行深度优化。",
-            stats: "4大用户圈层, 4大核心场景, 20+用户访谈, 85%内测满意度",
+            stats: "4大用户圈层, 4大核心场景, 20+用户访谈, 提升16%通话功能渗透率",
             painPoints: `收不到推送通知：app在后台或者关闭状态下，收不到来电推送，无法直接接听
 网络异常痛点：通话突然断开，不知道是网络问题还是对方挂断，情感交流被打断，产生焦虑
 基础体验较差：通话整体流程和细节体验与成熟产品存在差距，通话状态变更，快捷回复，通话结束场景等细节考虑不足
@@ -3015,19 +3002,35 @@
 扩展社交圈（次要）
 轻社交圈（扩展）
 同好社交圈（扩展）`,
-            userJourney: `情感维系场景（Ana异地睡前视频）：晚上10点习惯性检查手机→整理背景调整光线→点击视频通话等待接听→分享今天的事以及情感交流→互道晚安带着满足感入睡（痛点：通话异常结束）
-朋友聚会讨论（Lucas组织朋友群）：计划周末聚会需要协调→在朋友群组通话→讨论时间地点投票决定→确认计划分享到群里（痛点：通话不稳定）
-临时问事协调（Mariana确认信息）：需要确认信息想到对方→直接拨打等待接听→询问问题得到答案→挂断（痛点：未能及时收到来电）
-学习小组讨论（Julia设计小组）：准备学习讨论整理议题→在学习群组通话→分享屏幕讨论作业→记录不完整需要手动记录（痛点：屏幕共享看不清，邀请更多成员加入步骤繁琐）`,
-            userStories: `作为核心社交圈用户（Ana），我想要网络断开预警和智能重连，以便避免情感交流突然中断的焦虑，保持通话连续性
-作为扩展社交圈用户（Lucas），我想要群通话便捷，快速的组织群通话
-作为轻社交圈用户（Mariana），我想要及时收到来电，通话稳定进行
-作为同好社交圈用户（Julia），我想要群组互动便捷，能够邀请群外成员和进行通话链接分享，以便快速组织朋友聚会，拓展社交关系链`,
+            userJourney: `情感维系场景（Ana异地恋睡前视频）：晚上10点习惯性检查手机→整理背景调整光线→点击视频通话等待接听→分享今天的事以及情感交流→互道晚安带着满足感入睡
+- 痛点：通话异常结束
+- 期望：长时间通话保证不异常挂断
+朋友聚会讨论（Lucas组织朋友群）：计划周末聚会需要协调→在朋友群发起群组通话→讨论时间地点投票决定→确认计划分享到群里
+- 痛点：各成员通话状态不稳定
+- 期望：多人通话保证性能稳定，群成员网络状态标识
+临时问事协调（Mariana确认信息）：需要确认信息想到对方→直接拨打等待接听→询问问题得到答案→挂断
+- 痛点：未能及时收到来电；通话未接状态时，及时回复步骤繁琐
+- 期望：应用在后台/前台时都能及时收到通知；快捷回复，一键回拨等通话结束场景的便捷操作
+学习小组讨论（Julia设计小组）：准备学习讨论整理议题→在学习群发起群组通话→分享屏幕讨论作业→记录不完整需要手动记录
+- 痛点：屏幕共享看不清，不能邀请群外成员
+- 期望：屏幕共享模式改造，通话中邀请通讯录成员，通话链接分享`,
+            userStories: ``,
             features: `基础通话体验：1V1,1VN,群组音视频通话，屏幕共享等互动功能。呼叫状态流转提示，发言者高亮，快捷回复，留言功能等体验优化
 网络异常兜底：智能重连、弱网降级（自动降低画质/切音频）、明确提示原因（网络问题vs对方挂断）等
 通知系统优化：多通道推送保障（FCM+三星+APNs），确保不错过重要来电
 性能优化：推送通道优化、低端机型编解码优化、长时间通话电池优化
 社交关系链拓展：通话中邀请群外成员、临时邀请链接、通话链接社交分享、全选成员一键呼叫，降低社交组织成本`,
+            featuresTitle: "核心优化项",
+            featureTree: {
+                name: "核心优化项",
+                children: [
+                    { name: "基础通话体验", desc: "1V1,1VN,群组音视频通话，屏幕共享等互动功能。呼叫状态流转提示，发言者高亮，快捷回复，留言功能等体验优化", side: "right" },
+                    { name: "网络异常兜底", desc: "智能重连、弱网降级（自动降低画质/切音频）、明确提示原因（网络问题vs对方挂断）等" },
+                    { name: "通知系统优化", desc: "多通道推送保障（FCM+三星+APNs），确保不错过重要来电" },
+                    { name: "性能优化", desc: "推送通道优化、低端机型编解码优化、长时间通话电池优化" },
+                    { name: "社交关系链拓展", desc: "通话中邀请群外成员、临时邀请链接、通话链接社交分享、全选成员一键呼叫，降低社交组织成本", side: "right" }
+                ]
+            },
             axureUrl: "",
             designUrl: "",
             gallery: [
