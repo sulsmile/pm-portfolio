@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python recreate_portfolio_view.py)"
+      "Bash(python recreate_portfolio_view.py)",
+      "WebSearch"
     ]
   }
 }
