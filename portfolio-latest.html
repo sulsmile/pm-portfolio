@@ -2218,6 +2218,389 @@
             }
         }
 
+        /* ========================================
+           2026 Portfolio Visual Refresh
+           ======================================== */
+        :root {
+            --color-black: #080a09;
+            --color-white: #f5f7f5;
+            --color-muted: rgba(235, 241, 236, 0.58);
+            --color-border: rgba(235, 241, 236, 0.10);
+            --surface-1: rgba(255, 255, 255, 0.035);
+            --surface-2: rgba(255, 255, 255, 0.06);
+            --accent: #4ade80;
+            --accent-soft: rgba(74, 222, 128, 0.12);
+            --warm: #fbbf24;
+            --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.28);
+        }
+
+        html { scroll-behavior: smooth; background: var(--color-black); }
+
+        body {
+            background:
+                radial-gradient(circle at 8% 12%, rgba(34, 197, 94, 0.045), transparent 28%),
+                radial-gradient(circle at 92% 58%, rgba(251, 146, 60, 0.035), transparent 30%),
+                var(--color-black);
+        }
+
+        ::selection { color: #07110b; background: rgba(74, 222, 128, 0.88); }
+
+        .container {
+            width: min(100%, 1184px);
+            max-width: 1184px;
+            padding-inline: clamp(20px, 4vw, 40px);
+        }
+
+        .nav {
+            padding: 10px 0;
+            background: rgba(8, 10, 9, 0.72);
+            border-bottom-color: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+        }
+
+        .nav-content { min-height: 44px; }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 540;
+            letter-spacing: 0.02em;
+        }
+
+        .logo::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #86efac, #22c55e);
+            box-shadow: 0 0 16px rgba(74, 222, 128, 0.55);
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 6px; }
+
+        .nav-link {
+            padding: 8px 13px;
+            border-radius: 999px;
+            color: var(--color-muted);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+        }
+
+        .nav-link:hover { color: var(--color-white); background: rgba(255, 255, 255, 0.06); }
+
+        .section { padding: clamp(72px, 9vw, 112px) 0; }
+
+        .hero-white.section {
+            padding: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .profile-section {
+            grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+            gap: clamp(48px, 7vw, 92px);
+            padding: clamp(72px, 9vw, 112px) 0;
+            min-height: auto;
+        }
+
+        .profile-sidebar {
+            top: 88px;
+            padding: 28px 24px 22px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
+            box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .blob-avatar { width: 148px; height: 148px; margin-bottom: 24px; }
+
+        .blob-glass {
+            background: linear-gradient(145deg, rgba(74, 222, 128, 0.72), rgba(251, 191, 36, 0.42) 58%, rgba(249, 115, 22, 0.5));
+            border-color: rgba(255, 255, 255, 0.32);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .blob-avatar-initials { color: #07110b; font-size: 46px; letter-spacing: -0.06em; }
+
+        .profile-name::before {
+            content: 'PRODUCT MANAGER';
+            display: block;
+            margin-bottom: 8px;
+            color: #86efac;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.18em;
+        }
+
+        .profile-name h1 { font-size: 36px; letter-spacing: -0.05em; }
+        .profile-bio { margin-bottom: 24px; padding: 0; font-size: 14px; line-height: 1.75; }
+        .skills-section { margin-bottom: 24px; }
+
+        .skill-tag {
+            padding: 7px 11px;
+            color: rgba(220, 252, 231, 0.8);
+            background: rgba(74, 222, 128, 0.07);
+            border-color: rgba(74, 222, 128, 0.14);
+            font-size: 11px;
+        }
+
+        .contact-info { padding: 18px 0 0; }
+
+        .contact-item {
+            justify-content: flex-start;
+            padding: 7px 10px;
+            margin: 0 -10px 2px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .contact-item:hover { background: rgba(255, 255, 255, 0.05); transform: translateX(3px); }
+        .timeline-section { padding-top: 12px; }
+
+        .timeline-line {
+            left: 9px;
+            width: 1px;
+            background: linear-gradient(180deg, rgba(74, 222, 128, 0.6), rgba(255, 255, 255, 0.08) 75%, transparent);
+        }
+
+        .timeline-item { padding-left: 42px; margin-bottom: 24px; }
+
+        .timeline-node {
+            left: 3px;
+            top: 28px;
+            width: 13px;
+            height: 13px;
+            border: 3px solid #102117;
+            background: #4ade80;
+            box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.35), 0 0 20px rgba(74, 222, 128, 0.25);
+        }
+
+        .timeline-card {
+            padding: clamp(22px, 3vw, 30px);
+            border-color: rgba(255, 255, 255, 0.09);
+            border-radius: 22px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.16);
+        }
+
+        .timeline-card::before {
+            left: auto;
+            right: -110px;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.10), transparent 68%);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 222, 128, 0.22);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(74, 222, 128, 0.025));
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+        }
+
+        .timeline-item:hover .timeline-node {
+            border-color: #163622;
+            background: #86efac;
+            box-shadow: 0 0 22px rgba(74, 222, 128, 0.4);
+        }
+
+        .timeline-card-type {
+            padding: 5px 10px;
+            color: #86efac;
+            background: rgba(74, 222, 128, 0.075);
+            border: 1px solid rgba(74, 222, 128, 0.12);
+        }
+
+        .timeline-card-title { margin-top: 14px; letter-spacing: -0.03em; }
+
+        .projects-intro { padding-bottom: 48px; border-bottom: 0; }
+        .projects-intro .section-label { color: #86efac; }
+
+        .projects-intro .h1 {
+            max-width: 760px;
+            font-size: clamp(48px, 7vw, 78px);
+            letter-spacing: -0.055em;
+        }
+
+        .projects-intro .body-large { max-width: 650px; color: var(--color-muted); }
+        .projects-intro + .section { padding-top: 16px; }
+        .projects-grid { gap: 24px; }
+
+        .project-card {
+            min-height: 278px;
+            align-items: stretch;
+            border-color: rgba(255, 255, 255, 0.09);
+            border-radius: 24px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018));
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .project-card::before {
+            height: 100%;
+            background: linear-gradient(180deg, rgba(74, 222, 128, 0.46), rgba(251, 191, 36, 0.18), transparent 78%);
+            opacity: 0;
+            transition: opacity 0.35s var(--ease-out);
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(74, 222, 128, 0.25);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(74, 222, 128, 0.025));
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34), 0 0 40px rgba(74, 222, 128, 0.055);
+        }
+
+        .project-card-image {
+            flex-basis: 45%;
+            align-self: stretch;
+            padding: 0;
+            border-right-color: rgba(255, 255, 255, 0.07);
+            background: radial-gradient(circle at 50% 35%, rgba(74, 222, 128, 0.09), transparent 62%), rgba(255, 255, 255, 0.018);
+        }
+
+        .project-card-image img {
+            width: 100%;
+            height: 100%;
+            padding: 12px;
+            object-fit: contain;
+            transition: transform 0.45s var(--ease-out);
+        }
+
+        .project-card-image--prototype { min-height: 278px; background: #eef3f1; }
+
+        .project-card-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: clamp(22px, 3vw, 30px);
+        }
+
+        .project-card-tag {
+            align-self: flex-start;
+            padding: 5px 9px;
+            border-color: rgba(74, 222, 128, 0.15);
+            background: rgba(74, 222, 128, 0.07);
+            color: #86efac;
+        }
+
+        .project-card-title {
+            margin-top: 8px;
+            margin-bottom: 12px;
+            font-size: clamp(19px, 2.1vw, 24px);
+            letter-spacing: -0.04em;
+        }
+
+        .project-card-desc { -webkit-line-clamp: 3; font-size: 13px; line-height: 1.65; }
+
+        .detail-hero { min-height: min(760px, 76vh); border-bottom-color: rgba(255, 255, 255, 0.08); }
+        .detail-hero-content { padding-top: clamp(72px, 9vw, 112px); }
+
+        .detail-hero h1 {
+            max-width: 840px;
+            font-size: clamp(42px, 6vw, 72px);
+            letter-spacing: -0.055em;
+        }
+
+        .detail-hero-description { max-width: 720px; color: rgba(255, 255, 255, 0.58); }
+        .detail-hero-stats { gap: 20px; padding-top: 28px; }
+
+        .detail-stat-item {
+            padding: 18px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.035);
+            backdrop-filter: blur(10px);
+        }
+
+        .detail-section {
+            padding: clamp(72px, 8vw, 104px) 0;
+            border-bottom-color: rgba(255, 255, 255, 0.07);
+        }
+
+        .detail-section:nth-child(even) { background: rgba(255, 255, 255, 0.012); }
+        .detail-section-header { max-width: 720px; margin-bottom: 48px; }
+        .detail-section-label { color: #86efac; }
+
+        .pain-point-card,
+        .persona-card,
+        .story-card,
+        .link-card-item {
+            border-color: rgba(255, 255, 255, 0.085);
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.018));
+        }
+
+        .proto-gallery-group-title {
+            padding-bottom: 14px;
+            border-bottom-color: rgba(255, 255, 255, 0.09);
+            font-size: 20px;
+            letter-spacing: -0.025em;
+        }
+
+        .proto-gallery-item {
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.025);
+            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.24);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.012) !important;
+            border-top-color: rgba(255, 255, 255, 0.07) !important;
+        }
+
+        a:focus-visible, button:focus-visible { outline: 2px solid #86efac; outline-offset: 4px; }
+        #about, #projects { scroll-margin-top: 72px; }
+
+        @media (max-width: 900px) {
+            .profile-section { grid-template-columns: 1fr; gap: 54px; }
+            .profile-sidebar { position: relative; top: auto; width: min(100%, 480px); margin-inline: auto; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .project-card { min-height: 250px; }
+            .project-card-image--prototype { min-height: 250px; }
+        }
+
+        @media (max-width: 600px) {
+            .nav-link { padding-inline: 9px; font-size: 9px; }
+            .profile-section { padding-top: 48px; }
+            .timeline-item { padding-left: 30px; }
+            .timeline-line { left: 6px; }
+            .timeline-node { left: 0; }
+            .project-card { flex-direction: column; }
+
+            .project-card-image {
+                flex: none;
+                width: 100%;
+                height: 260px;
+                border-right: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            }
+
+            .project-card-image--prototype { min-height: 260px; }
+            .detail-hero-stats { flex-wrap: wrap; }
+            .detail-stat-item { flex: 1 1 calc(50% - 10px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
 
     </style>
 </head>
@@ -2246,12 +2629,16 @@
     <div id="listPage" class="page">
         <nav class="nav">
             <div class="container nav-content">
-                <a href="#" class="logo">PM Portfolio</a>
+                <a href="#about" class="logo">PM Portfolio</a>
+                <div class="nav-links" aria-label="页面导航">
+                    <a href="#about" class="nav-link">ABOUT</a>
+                    <a href="#projects" class="nav-link">PROJECTS</a>
+                </div>
             </div>
         </nav>
 
         <!-- Personal Intro Section -->
-        <section class="section hero-white">
+        <section id="about" class="section hero-white">
             <div class="container profile-section">
                 <!-- Left Sidebar: Personal Profile -->
                 <aside class="profile-sidebar">
@@ -2375,7 +2762,7 @@
         </section>
 
 
-        <section class="section projects-intro">
+        <section id="projects" class="section projects-intro">
             <div class="container">
                 <div class="section-label mono-label">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
